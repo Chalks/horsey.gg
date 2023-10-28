@@ -21,6 +21,7 @@ module.exports = {
         computed: 'readonly',
         useHead: 'readonly',
         onMounted: 'readonly',
+        watch: 'readonly',
     },
     parserOptions: {
         parser: '@babel/eslint-parser',
