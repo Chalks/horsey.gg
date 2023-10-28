@@ -3,13 +3,8 @@
 @tailwind utilities;
 
 @layer base {
-    body {
-        @apply text-gray-50;
-        background-color: #000020;
-    }
-
-    a {
-        @apply text-blue-300 hover:text-blue-500 transition-colors;
+    html {
+        @apply bg-blue-50;
     }
 
     input, textarea, button {
@@ -22,21 +17,5 @@
         &:hover {
             @apply bg-gray-900;
         }
-    }
-
-    h1 {
-        font-size: 3rem;
-    }
-
-    h2 {
-        font-size: 2rem;
-    }
-
-    h3 {
-        font-size: 1rem;
-    }
-
-    p {
-        font-size: 0.85rem;
     }
 }

@@ -1,18 +1,17 @@
-<script setup>
-// import AppFooter from '~/components/AppFooter.vue';
-// import AppHeader from '~/components/AppHeader.vue';
-</script>
-
 <template>
     <div class="flex flex-col min-h-screen">
-        <div class="p-4">Header</div>
+        <AppHeader
+            class="p-4 mb-4"
+        />
 
-        <div class="content flex-grow overflow-auto">
+        <div class="content flex-grow overflow-auto px-4">
             <NuxtLayout>
                 <NuxtPage />
             </NuxtLayout>
         </div>
 
-        <div class="p-4">Footer</div>
+        <AppFooter
+            class="p-4 mt-4"
+        />
     </div>
 </template>
