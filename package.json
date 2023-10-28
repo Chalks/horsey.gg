@@ -1,0 +1,38 @@
+{
+  "scripts": {
+    "lint": "eslint --ext .js,.vue .",
+    "test": "jest --verbose",
+    "dev": "nuxt dev",
+    "build": "nuxt build",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "start": "nuxt start",
+    "deploy": "rm -rf .output; npm run generate; npm run deploy:2",
+    "deploy:2": "cd .output/public; git init --initial-branch=main; git remote add origin git@github.com:Chalks/horsey.gg.git; npm run deploy:3",
+    "deploy:3": "cd .output/public; git add .; git commit -m 'Initial commit'; npm run deploy:4",
+    "deploy:4": "cd .output/public; git push --force origin main:netlify"
+  },
+  "dependencies": {
+    "@iconify/vue": "^4.1.1",
+    "@pinia/nuxt": "^0.4.11",
+    "nuxt": "^3.5.1",
+    "pinia": "^2.1.3"
+  },
+  "devDependencies": {
+    "@babel/eslint-parser": "^7.21.8",
+    "@nuxt/eslint-config": "^0.1.1",
+    "@tailwindcss/typography": "^0.5.9",
+    "autoprefixer": "^10.4.13",
+    "babel-jest": "^27.4.6",
+    "eslint": "^8.8.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-jest": "^26.0.0",
+    "eslint-plugin-vue": "^9.14.1",
+    "jest": "^27.4.7",
+    "tailwindcss": "^3.2.4"
+  },
+  "overrides": {
+    "vue": "latest"
+  }
+}
