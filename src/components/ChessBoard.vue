@@ -115,27 +115,7 @@ const createGoal = () => {
     board.addMarker(GOAL_MARKER, boardGoal.value);
 };
 
-const initStats = () => {
-    stats.moves = 0;
-    stats.invalidMoves = 0;
-    stats.startPerformance = performance.now();
-    stats.endPerformance = -1;
-    stats.ms = 0;
-};
-
-const reset = () => {
-    console.log('reset');
-    destroyBoard();
-    initStats();
-    createBoard();
-    createPiece();
-    createGoal();
-};
-// END reset functions
-
-// START watchers
-watch(boardLoc, () => {
-    // draw legal moves when the location of the piece changes
+const drawLegalMoves = () => {
     if (!board) return;
 
     board.removeMarkers(MOVE_MARKER);
@@ -145,6 +125,29 @@ watch(boardLoc, () => {
             board.addMarker(MOVE_MARKER, square);
         });
     }
+};
+
+const initStats = () => {
+    stats.moves = 0;
+    stats.invalidMoves = 0;
+    stats.startPerformance = performance.now();
+    stats.endPerformance = -1;
+    stats.ms = 0;
+};
+
+const reset = () => {
+    destroyBoard();
+    initStats();
+    createBoard();
+    createPiece();
+    createGoal();
+    drawLegalMoves();
+};
+// END reset functions
+
+// START watchers
+watch(boardLoc, () => {
+    drawLegalMoves();
 });
 
 watch(win, (val) => {

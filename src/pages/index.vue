@@ -1,4 +1,5 @@
 <script setup>
+import {useBaseKnightStore} from 'store/baseKnight.js';
 import getRandomSquare from '~/assets/js/getRandomSquare.js';
 
 const piece = ref(null);
@@ -19,6 +20,7 @@ const reset = () => {
 
 const handleWin = (e) => {
     stats.value = e;
+    useBaseKnightStore().applyStats(e);
     reset();
 };
 
