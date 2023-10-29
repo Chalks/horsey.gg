@@ -13,13 +13,14 @@ const props = defineProps({
     showLegalMoves: {type: Boolean, default: false},
 });
 
-const emit = defineEmits(['win', 'move', 'invalidMove', 'click']);
+const emit = defineEmits(['start', 'win', 'move', 'invalidMove']);
 
 let board = null;
 const boardEl = ref(null);
 const boardLoc = ref(null);
 const boardGoal = ref(null);
 const boardPiece = ref(null);
+const playing = ref(false);
 const validSquares = computed(() => getValidSquares(boardPiece.value, boardLoc.value));
 const win = computed(() => boardLoc.value !== null
     && boardGoal.value !== null
@@ -59,8 +60,6 @@ const handleMouseleave = () => {
 };
 
 const handleMousedown = (event) => {
-    emit('click');
-
     if (!board) return;
     if (win.value) return;
 
@@ -100,6 +99,7 @@ const createBoard = () => {
 
 const createPiece = () => {
     if (!board) return;
+    if (!props.piece || !props.start) return;
 
     boardPiece.value = props.piece;
     boardLoc.value = props.start;
@@ -108,6 +108,7 @@ const createPiece = () => {
 
 const createGoal = () => {
     if (!board) return;
+    if (!props.end) return;
 
     boardGoal.value = props.end;
     board.removeMarkers(GOAL_MARKER);
@@ -126,13 +127,9 @@ const reset = () => {
     console.log('reset');
     destroyBoard();
     initStats();
-
-    if (props.piece && props.start && props.end) {
-        console.log('creating');
-        createBoard();
-        createPiece();
-        createGoal();
-    }
+    createBoard();
+    createPiece();
+    createGoal();
 };
 // END reset functions
 
@@ -151,27 +148,42 @@ watch(boardLoc, () => {
 });
 
 watch(win, (val) => {
-    if (!board) return;
-
     if (val) {
-        board.removeMarkers(HOVER_MARKER);
-        board.removeMarkers(MOVE_MARKER);
+        if (board) {
+            board.removeMarkers(HOVER_MARKER);
+            board.removeMarkers(MOVE_MARKER);
+        }
         stats.endPerformance = performance.now();
         stats.ms = stats.endPerformance - stats.startPerformance;
+        playing.value = false;
         emit('win', stats);
     }
 });
 
-watch(() => props.piece, () => reset());
-watch(() => props.start, () => reset());
-watch(() => props.end, () => reset());
-// END watchers
-
 onMounted(() => {
     reset();
 });
+// END watchers
+
+const startGame = () => {
+    playing.value = true;
+    emit('start');
+    reset();
+};
 </script>
 
 <template>
-    <div ref="boardEl" />
+    <div class="relative">
+        <div
+            ref="boardEl"
+        />
+        <div
+            v-if="!playing"
+            class="cursor-pointer bg-gray-300/80 absolute inset-0 flex flex-col items-center justify-center select-none gap-2"
+            @click="startGame"
+        >
+            <span>Click to play</span>
+            <slot name="default" />
+        </div>
+    </div>
 </template>
