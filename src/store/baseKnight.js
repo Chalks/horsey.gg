@@ -1,6 +1,6 @@
 import {defineStore} from 'pinia';
 
-const ROLLING = 3;
+const ROLLING = 100;
 
 // eslint-disable-next-line import/prefer-default-export
 export const useBaseKnightStore = defineStore('baseKnightStore', () => {

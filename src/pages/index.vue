@@ -46,7 +46,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <h1>Horsey.gg</h1>
+    <h1>Base Knight</h1>
     <ChessBoard
         show-legal-moves
         :piece="piece"
@@ -61,4 +61,13 @@ onMounted(() => {
             <StatsDisplay v-if="stats" :stats="stats" />
         </template>
     </ChessBoard>
+    <p>The Base Knight game trains you on the basic knight moves.</p>
+    <h3>fork knight</h3>
+    <p>coming soon - find the square that forks two pieces</p>
+    <h3>defense knight</h3>
+    <p>coming soon - find a square that defends a piece</p>
+    <h3>defended knight</h3>
+    <p>coming soon - find a square that defends the knight</p>
+    <h3>dodge knight</h3>
+    <p>coming soon - get to a square while dodging all no-no squares</p>
 </template>
