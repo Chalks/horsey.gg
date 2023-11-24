@@ -5,6 +5,7 @@ import 'cm-chessboard/assets/chessboard.css';
 import 'cm-chessboard/assets/extensions/markers/markers.css';
 
 import getValidSquares from '~/assets/js/getValidSquares.js';
+import getKnightDistance from '~/assets/js/getKnightDistance.js';
 
 const props = defineProps({
     piece: {type: String, default: null},
@@ -29,6 +30,7 @@ const win = computed(() => boardLoc.value !== null
 const stats = {
     moves: 0,
     invalidMoves: 0,
+    optimalMoves: 0,
     startPerformance: 0,
     endPerformance: 0,
     ms: 0,
@@ -130,6 +132,7 @@ const drawLegalMoves = () => {
 const initStats = () => {
     stats.moves = 0;
     stats.invalidMoves = 0;
+    stats.optimalMoves = 0;
     stats.startPerformance = performance.now();
     stats.endPerformance = -1;
     stats.ms = 0;
@@ -158,6 +161,7 @@ watch(win, (val) => {
         }
         stats.endPerformance = performance.now();
         stats.ms = stats.endPerformance - stats.startPerformance;
+        stats.optimalMoves = getKnightDistance(props.start, props.end);
         playing.value = false;
         emit('win', stats);
     }
