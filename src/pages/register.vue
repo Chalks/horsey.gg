@@ -1,21 +1,37 @@
 <script setup>
-import {useSjwtStore} from 'store/sjwt.js';
+import {register, sjwt, save} from 'sjwt';
+import {useUserStore} from 'store/user.js';
 
-const sjwtStore = useSjwtStore();
+const displayName = ref('');
 const email = ref('');
 const password = ref('');
 
-const register = async (e) => {
+const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await sjwtStore.register(email.value, password.value);
-    console.log(response);
+
+    const response = await register({
+        email: email.value,
+        password: password.value,
+    });
+
+    if (response.token) {
+        await save({
+            publicData: {
+                displayName: displayName.value,
+            },
+        });
+
+        useUserStore().setUser(sjwt.user);
+    } else {
+        console.error(response);
+    }
 };
 
 </script>
 
 <template>
     <div class="prose">
-        <form @submit="register">
+        <form @submit="handleSubmit">
             <h3>Register</h3>
             <p>
                 Your horsey.gg account will enable you to track stats, and if you
@@ -28,6 +44,15 @@ const register = async (e) => {
                 v-model="email"
                 type="email"
                 name="email"
+                placeholder="Email"
+            />
+
+            <label for="displayName" class="cursor-pointer">Display Name</label>
+            <input
+                id="displayName"
+                v-model="displayName"
+                type="displayName"
+                name="displayName"
                 placeholder="Email"
             />
 

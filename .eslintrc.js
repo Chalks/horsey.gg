@@ -8,6 +8,7 @@ module.exports = {
     },
     globals: {
         defineNuxtConfig: 'readonly',
+        defineNuxtPlugin: 'readonly',
         definePageMeta: 'readonly',
         useRuntimeConfig: 'readonly',
         defineNuxtRouteMiddleware: 'readonly',
