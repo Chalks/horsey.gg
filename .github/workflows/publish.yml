@@ -17,7 +17,6 @@ jobs:
       - name: Deploy to netlify branch
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          tag: ${{ env.GITHUB_REF_NAME }}
         run: |
           git fetch
           git checkout netlify
@@ -26,11 +25,10 @@ jobs:
           mv .output/public/* .
           rm -rf .output
           git add .
-          git commit -m "${env.GIGHUB_REF_NAME}"
+          git commit -m "deploy: $GITHUB_REF_NAME"
           git push origin netlify
       - name: Set release to latest
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          tag: ${{ env.GITHUB_REF_NAME }}
         run: |
           gh release edit ${GITHUB_REF_NAME} --prerelease=false --latest
