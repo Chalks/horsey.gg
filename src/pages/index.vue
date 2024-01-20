@@ -70,4 +70,6 @@ onMounted(() => {
     <p>coming soon - find a square that defends the knight</p>
     <h3>dodge knight</h3>
     <p>coming soon - get to a square while dodging all no-no squares</p>
+    <h3>predict knight</h3>
+    <p>coming soon - find a square X moves away from the knight</p>
 </template>
