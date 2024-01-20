@@ -21,10 +21,10 @@ jobs:
         run: |
           git fetch
           git checkout netlify
-          mkdir ../tmp
-          mv \.* ../tmp/
-          mv * ../tmp/
-          mv ../tmp/.output/public/* .
+          rm -rf ./*
+          rm -rf .nuxt
+          mv .output/public/* .
+          rm -rf .output
           git add .
           git commit -m "${env.GIGHUB_REF_NAME}"
           git push origin netlify
