@@ -14,14 +14,20 @@ jobs:
       - run: npm run lint
       - run: npm run test
       - run: npm run generate
-      - run: |
-          cd .output/public
-          git init --initial-branch=main
-          git remote add origin git@github.com:Chalks/horsey.gg.git
+      - name: Deploy to netlify branch
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          tag: ${{ env.GITHUB_REF_NAME }}
+        run: |
+          git fetch
+          git checkout netlify
+          mkdir ../tmp
+          mv \.* ../tmp/
+          mv * ../tmp/
+          mv ../tmp/.output/public/* .
           git add .
-          git commit -m 'Initial commit'
-          git push --force origin main:netlify
-          cd ../../
+          git commit -m "${env.GIGHUB_REF_NAME}"
+          git push origin netlify
       - name: Set release to latest
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
