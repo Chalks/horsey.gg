@@ -25,6 +25,8 @@ jobs:
           mv .output/public/* .
           rm -rf .output
           git add .
+          git config --global user.email "publish-action@github.com"
+          git config --global user.name "publish action"
           git commit -m "deploy: $GITHUB_REF_NAME"
           git push origin netlify
       - name: Set release to latest
