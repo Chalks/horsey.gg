@@ -13,6 +13,7 @@ module.exports = {
         useRuntimeConfig: 'readonly',
         defineNuxtRouteMiddleware: 'readonly',
         useCookie: 'readonly',
+        useNuxtApp: 'readonly',
         useRoute: 'readonly',
         useRouter: 'readonly',
         navigateTo: 'readonly',

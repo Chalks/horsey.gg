@@ -22,9 +22,10 @@ const handleSubmit = async (e) => {
 
     if (response.token) {
         useUserStore().setUser(sjwt.user);
+        navigateTo('/');
     } else {
-        // TODO use a toast
-        console.error(response);
+        const {$toast} = useNuxtApp();
+        $toast.error(response.message);
     }
 
     loading.value = false;

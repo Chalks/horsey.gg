@@ -29,9 +29,10 @@ const handleSubmit = async (e) => {
         });
 
         useUserStore().setUser(sjwt.user);
+        navigateTo('/');
     } else {
-        // TODO use a toast
-        console.error(response);
+        const {$toast} = useNuxtApp();
+        $toast.error(response.message);
     }
 
     loading.value = false;
@@ -62,7 +63,7 @@ const handleSubmit = async (e) => {
             v-model="displayName"
             type="displayName"
             name="displayName"
-            placeholder="Email"
+            placeholder="Display Name"
         />
 
         <label for="password" class="cursor-pointer">Password</label>
