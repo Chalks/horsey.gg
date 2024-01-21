@@ -30,51 +30,49 @@ const handleSubmit = async (e) => {
 </script>
 
 <template>
-    <div class="prose">
-        <form @submit="handleSubmit">
-            <h3>Register</h3>
-            <p>
-                Your horsey.gg account will enable you to track stats, and if you
-                want we'll notify you when new game modes are available.
-            </p>
+    <form @submit="handleSubmit">
+        <h3>Register</h3>
+        <p>
+            Your horsey.gg account will enable you to track stats, and if you
+            want we'll notify you when new game modes are available.
+        </p>
 
-            <label for="email" class="cursor-pointer">Email</label>
-            <input
-                id="email"
-                v-model="email"
-                type="email"
-                name="email"
-                placeholder="Email"
-            />
+        <label for="email" class="cursor-pointer">Email</label>
+        <input
+            id="email"
+            v-model="email"
+            type="email"
+            name="email"
+            placeholder="Email"
+        />
 
-            <label for="displayName" class="cursor-pointer">Display Name</label>
-            <input
-                id="displayName"
-                v-model="displayName"
-                type="displayName"
-                name="displayName"
-                placeholder="Email"
-            />
+        <label for="displayName" class="cursor-pointer">Display Name</label>
+        <input
+            id="displayName"
+            v-model="displayName"
+            type="displayName"
+            name="displayName"
+            placeholder="Email"
+        />
 
-            <label for="password" class="cursor-pointer">Password</label>
-            <input
-                id="password"
-                v-model="password"
-                type="password"
-                name="password"
-                placeholder="********"
-            />
+        <label for="password" class="cursor-pointer">Password</label>
+        <input
+            id="password"
+            v-model="password"
+            type="password"
+            name="password"
+            placeholder="********"
+        />
 
-            <div class="flex items-center">
-                <input id="subscribe" type="checkbox" class="w-auto mr-4" checked />
-                <label for="subscribe" class="cursor-pointer">
-                    Tell me when there are new horseys to play with
-                </label>
-            </div>
+        <div class="flex items-center">
+            <input id="subscribe" type="checkbox" class="w-auto mr-4" checked />
+            <label for="subscribe" class="cursor-pointer">
+                Tell me when there are new horseys to play with
+            </label>
+        </div>
 
-            <input type="submit" value="Register" />
-        </form>
-    </div>
+        <input type="submit" value="Register" />
+    </form>
 </template>
 
 

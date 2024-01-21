@@ -21,7 +21,6 @@ onMounted(() => {
 <template>
     <form
         ref="interestForm"
-        class="prose mx-auto"
         action="https://api.formcake.com/api/form/FIXME"
         method="post"
     >
