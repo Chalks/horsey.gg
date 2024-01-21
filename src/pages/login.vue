@@ -1,8 +1,7 @@
 <script setup>
-import {register, sjwt, save} from 'sjwt';
+import {login, sjwt} from 'sjwt';
 import {useUserStore} from 'store/user.js';
 
-const displayName = ref('');
 const email = ref('');
 const password = ref('');
 const loading = ref(false);
@@ -16,18 +15,12 @@ const handleSubmit = async (e) => {
 
     loading.value = true;
 
-    const response = await register({
+    const response = await login({
         email: email.value,
         password: password.value,
     });
 
     if (response.token) {
-        await save({
-            publicData: {
-                displayName: displayName.value,
-            },
-        });
-
         useUserStore().setUser(sjwt.user);
     } else {
         // TODO use a toast
@@ -40,28 +33,14 @@ const handleSubmit = async (e) => {
 </script>
 
 <template>
-    <h1>Register</h1>
+    <h1>Login</h1>
     <form @submit="handleSubmit">
-        <p>
-            Your horsey.gg account will enable you to track stats, and if you
-            want we'll notify you when new game modes are available.
-        </p>
-
         <label for="email" class="cursor-pointer">Email</label>
         <input
             id="email"
             v-model="email"
             type="email"
             name="email"
-            placeholder="Email"
-        />
-
-        <label for="displayName" class="cursor-pointer">Display Name</label>
-        <input
-            id="displayName"
-            v-model="displayName"
-            type="displayName"
-            name="displayName"
             placeholder="Email"
         />
 
@@ -74,20 +53,12 @@ const handleSubmit = async (e) => {
             placeholder="********"
         />
 
-        <div class="flex items-center">
-            <input id="subscribe" type="checkbox" class="w-auto mr-4" checked />
-            <label for="subscribe" class="cursor-pointer">
-                Tell me when there are new horseys to play with
-            </label>
-        </div>
-
         <div class="relative">
-            <input type="submit" value="Register" :disabled="loading" />
+            <input type="submit" value="Login" :disabled="loading" />
             <div class="text-white absolute top-1/2 left-4 -translate-y-1/2">
                 <LoadingSpinner v-if="loading" />
             </div>
         </div>
     </form>
 </template>
-
 

@@ -12,10 +12,17 @@
     }
 
     input[type="submit"], button.submit {
-        @apply cursor-pointer bg-gray-700 transition-colors text-gray-200;
+        @apply cursor-pointer bg-gray-700 transition-colors text-white;
 
         &:hover {
             @apply bg-gray-900;
         }
+    }
+
+    input[type="submit"]:disabled,
+    button.submit:disabled,
+    input:disabled,
+    button:disabled {
+        @apply cursor-not-allowed hover:bg-gray-700;
     }
 }
