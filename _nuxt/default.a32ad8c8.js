@@ -1,0 +1,1 @@
+import{C as o,e as s,i as t,o as r}from"./entry.5ada603b.js";const a={},c={class:"prose prose-blue mx-auto"};function n(e,l){return r(),s("div",c,[t(e.$slots,"default")])}const d=o(a,[["render",n]]);export{d as default};
