@@ -10,7 +10,8 @@ export default defineNuxtPlugin({
         },
         'app:created': () => {
             sjwt.configure({
-                projectId: '1062de0d-2d3c-40ce-a110-889c087a1d29',
+                host: useRuntimeConfig().public.sjwtHost,
+                projectId: useRuntimeConfig().public.projectId,
             });
         },
     },

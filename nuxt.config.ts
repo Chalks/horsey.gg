@@ -28,16 +28,16 @@ export default defineNuxtConfig({
 
     app: {
         head: {
-            title: 'Horsey.gg',
+            title: 'horsey.gg',
             meta: [
                 {charset: 'utf-8'},
                 {name: 'viewport', content: 'width=device-width, initial-scale=1'},
                 {hid: 'description', name: 'description', content: 'The best knight sight trainer'},
-                {hid: 'og-title', property: 'og:title', content: 'Horsey.gg'},
+                {hid: 'og-title', property: 'og:title', content: 'horsey.gg'},
                 {hid: 'og-description', property: 'og:description', content: 'The best knight sight trainer'},
                 {hid: 'og-type', property: 'og:type', content: 'website'},
                 {hid: 'og-site_name', property: 'og:og-site_name', content: 'horsey.gg'},
-                {hid: 'twitter-title', property: 'twitter:title', content: 'Horsey.gg'},
+                {hid: 'twitter-title', property: 'twitter:title', content: 'horsey.gg'},
                 {hid: 'twitter-description', property: 'twitter:description', content: 'The best knight sight trainer'},
                 {hid: 'twitter-site', property: 'twitter:site', content: 'horsey.gg'},
             ],
@@ -71,6 +71,12 @@ export default defineNuxtConfig({
 
     runtimeConfig: {
         public: {
+            sjwtHost: process.env.NODE_ENV === 'production'
+                ? 'https://api.simplejwt.com'
+                : 'http://localhost:3001',
+            projectId: process.env.NODE_ENV === 'production'
+                ? '1062de0d-2d3c-40ce-a110-889c087a1d29'
+                : '2b325b80-0dd9-4812-9cba-47c9d694c3c2',
         },
     },
 
