@@ -76,7 +76,7 @@ export default defineNuxtConfig({
                 : 'http://localhost:3001',
             projectId: process.env.NODE_ENV === 'production'
                 ? '1062de0d-2d3c-40ce-a110-889c087a1d29'
-                : '2b325b80-0dd9-4812-9cba-47c9d694c3c2',
+                : '580e9648-b217-408f-a248-d9ecc122d104',
         },
     },
 

@@ -1,17 +1,13 @@
 <template>
     <div class="flex flex-col min-h-screen">
-        <AppHeader
-            class="p-4 mb-4 z-50"
-        />
+        <AppHeader />
 
-        <div class="content flex-grow overflow-auto px-4">
+        <div class="flex-grow overflow-auto px-4 py-12">
             <NuxtLayout>
                 <NuxtPage />
             </NuxtLayout>
         </div>
 
-        <AppFooter
-            class="p-4 mt-4"
-        />
+        <AppFooter />
     </div>
 </template>
