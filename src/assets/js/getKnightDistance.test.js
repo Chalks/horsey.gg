@@ -1,3 +1,9 @@
+import {
+    describe,
+    expect,
+    it,
+} from 'vitest';
+
 import getKnightDistance from './getKnightDistance.js';
 
 describe('getKnightDistance', () => {

@@ -4,7 +4,6 @@ module.exports = {
         'browser': true,
         'es6': true,
         'node': true,
-        'jest/globals': true,
     },
     globals: {
         defineNuxtConfig: 'readonly',
@@ -33,10 +32,11 @@ module.exports = {
         '@nuxt/eslint-config',
         'airbnb-base',
         'plugin:vue/vue3-recommended',
+        'plugin:vitest/recommended',
     ],
     ignorePatterns: ['dist/'],
     plugins: [
-        'jest',
+        'vitest',
     ],
     rules: {
         'indent': ['error', 4, {
