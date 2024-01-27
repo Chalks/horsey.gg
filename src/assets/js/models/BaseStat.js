@@ -1,4 +1,4 @@
-import getKnightDistance from '~/assets/js/getKnightDistance.js';
+import getKnightDistance from '../getKnightDistance.js';
 
 export default class BaseStat {
     start;
@@ -21,6 +21,15 @@ export default class BaseStat {
         ms,
         date,
     }) {
+        if (start === undefined
+            || end === undefined
+            || moves === undefined
+            || invalidMoves === undefined
+            || ms === undefined
+            || date === undefined
+        ) {
+            throw new Error('invalid arguments');
+        }
         this.start = start;
         this.end = end;
         this.moves = moves;
@@ -51,20 +60,23 @@ export default class BaseStat {
      *     [timestamp]: [start,end,moves,invalidMoves,optimalMoves,ms]
      * }
      */
-    static deserialize(date, [
-        start,
-        end,
-        moves,
-        invalidMoves,
-        ms,
-    ] = []) {
+    static deserialize(data = {}) {
+        const date = Object.keys(data)[0];
+        const [
+            start,
+            end,
+            moves,
+            invalidMoves,
+            ms,
+        ] = data[date];
+
         return new BaseStat({
             start,
             end,
             moves,
             invalidMoves,
             ms,
-            date,
+            date: Number(date),
         });
     }
 }

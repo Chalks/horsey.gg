@@ -5,7 +5,7 @@ export default class SaveFile {
     baseStats;
 
     constructor({
-        baseStats = [],
+        baseStats = {},
     } = {}) {
         this.baseStats = baseStats;
     }
@@ -41,22 +41,25 @@ export default class SaveFile {
     serialize() {
         return {
             baseStats: Object.keys(this.baseStats)
-                .reduce((acc, date) => {
-                    acc[date] = this.baseStats[date].serialize();
-                    return acc;
-                }, {}),
+                .reduce((acc, date) => ({
+                    ...acc,
+                    ...this.baseStats[date].serialize(),
+                }), {}),
         };
     }
 
     static deserialize({
         baseStats = {},
     } = {}) {
-        return {
+        return new SaveFile({
             baseStats: Object.keys(baseStats)
-                .sort()
-                .map((date) => BaseStat
-                    .deserialize(date, baseStats[date])),
-        };
+                .reduce((acc, date) => {
+                    acc[date] = BaseStat.deserialize({
+                        [date]: baseStats[date],
+                    });
+                    return acc;
+                }, {}),
+        });
     }
 }
 
