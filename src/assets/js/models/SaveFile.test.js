@@ -31,7 +31,7 @@ describe('SaveFile', () => {
         const date = Date.now();
         const date2 = date - 10000;
 
-        validDeserialized = {
+        validDeserialized = new SaveFile({
             baseStats: {
                 [date]: new BaseStat({
                     start: 'a1',
@@ -50,7 +50,7 @@ describe('SaveFile', () => {
                     date: date2,
                 }),
             },
-        };
+        });
 
         validSerialized = {
             baseStats: {

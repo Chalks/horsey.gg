@@ -22,14 +22,14 @@ describe('BaseStat', () => {
     };
 
     beforeEach(() => {
-        validDeserialized = {
+        validDeserialized = new BaseStat({
             start: 'a1',
             end: 'h8',
             moves: 10,
             invalidMoves: 0,
             ms: 4000,
             date: Date.now(),
-        };
+        });
 
         validSerialized = {
             [validDeserialized.date]: [
