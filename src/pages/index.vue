@@ -8,7 +8,6 @@ const userStore = useUserStore();
 const piece = ref(null);
 const start = ref(null);
 const end = ref(null);
-const stats = ref(null);
 
 const reset = () => {
     piece.value = ['bn', 'wn'][Math.floor(Math.random() * 2)];
@@ -31,7 +30,6 @@ const handleWin = (winData) => {
         ms: winData.ms,
         date: Date.now(),
     }));
-    saveFile.save();
     reset();
 };
 
@@ -70,11 +68,9 @@ onMounted(() => {
         @win="handleWin"
         @move="handleMove"
         @invalid-move="handleInvalidMove"
-    >
-        <template #default>
-            <StatsDisplay v-if="stats" :stats="stats" />
-        </template>
-    </ChessBoard>
+    />
+
+    <StatsDisplay base-knight />
 
     <p>
         Reset stats, test mode only:

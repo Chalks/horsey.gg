@@ -1,9 +1,13 @@
 <script setup>
-defineProps({
-    stats: {type: Object, required: true},
-});
+import {useBaseStatsStore} from 'store/baseStats.js';
+
+const baseStatsStore = useBaseStatsStore();
+// import {useUserStore} from 'store/user.js';
+
+// const userStore = useUserStore();
+// const {saveFile} = userStore;
 </script>
 
 <template>
-    <pre>{{ stats }}</pre>
+    <pre>{{ baseStatsStore.baseStats }}</pre>
 </template>

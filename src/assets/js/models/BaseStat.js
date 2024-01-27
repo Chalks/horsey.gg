@@ -1,3 +1,4 @@
+import {save as sjwtSave} from 'sjwt';
 import getKnightDistance from '../getKnightDistance.js';
 
 export default class BaseStat {
@@ -8,6 +9,8 @@ export default class BaseStat {
     moves;
 
     invalidMoves;
+
+    optimalMoves;
 
     ms;
 
@@ -36,10 +39,20 @@ export default class BaseStat {
         this.invalidMoves = invalidMoves;
         this.ms = ms;
         this.date = date;
+        this.optimalMoves = getKnightDistance(start, end);
     }
 
-    get optimalMoves() {
-        return getKnightDistance(this.start, this.end);
+    save() {
+        // TODO FIXME this overwrites everything right now
+        sjwtSave({
+            privateData: {
+                saveFile: {
+                    baseStats: {
+                        ...this.serialize(),
+                    },
+                },
+            },
+        });
     }
 
     serialize() {

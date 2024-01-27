@@ -27,6 +27,7 @@ export default class SaveFile {
 
     addBaseStat(baseStat) {
         this.baseStats[baseStat.date] = baseStat;
+        // TODO FIXME baseStat.save();
         this.save();
     }
 
