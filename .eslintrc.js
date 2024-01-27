@@ -1,10 +1,5 @@
 module.exports = {
     root: true,
-    env: {
-        'browser': true,
-        'es6': true,
-        'node': true,
-    },
     globals: {
         defineNuxtConfig: 'readonly',
         defineNuxtPlugin: 'readonly',
@@ -25,8 +20,8 @@ module.exports = {
         watch: 'readonly',
     },
     parserOptions: {
-        parser: '@babel/eslint-parser',
         requireConfigFile: false,
+        ecmaVersion: 2022,
     },
     extends: [
         '@nuxt/eslint-config',
