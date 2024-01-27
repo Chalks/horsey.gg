@@ -1,6 +1,9 @@
 <script setup>
-import {useBaseKnightStore} from 'store/baseKnight.js';
-import getRandomSquare from '~/assets/js/getRandomSquare.js';
+import BaseStat from 'assets/js/models/BaseStat.js';
+import {useUserStore} from 'store/user.js';
+import getRandomSquare from 'assets/js/getRandomSquare.js';
+
+const userStore = useUserStore();
 
 const piece = ref(null);
 const start = ref(null);
@@ -18,9 +21,17 @@ const reset = () => {
     end.value = tmp;
 };
 
-const handleWin = (e) => {
-    stats.value = e;
-    useBaseKnightStore().applyStats(e);
+const handleWin = (winData) => {
+    const {saveFile} = userStore;
+    saveFile.addBaseStat(new BaseStat({
+        start: start.value,
+        end: end.value,
+        moves: winData.moves,
+        invalidMoves: winData.invalidMoves,
+        ms: winData.ms,
+        date: Date.now(),
+    }));
+    saveFile.save();
     reset();
 };
 
@@ -39,6 +50,9 @@ const handleStart = () => {
     console.log('started');
 };
 
+const resetStats = () => {
+    userStore.saveFile.resetBaseStats();
+};
 
 onMounted(() => {
     reset();
@@ -61,6 +75,12 @@ onMounted(() => {
             <StatsDisplay v-if="stats" :stats="stats" />
         </template>
     </ChessBoard>
+
+    <p>
+        Reset stats, test mode only:
+        <button type="button" @click="resetStats">Reset stats</button>
+    </p>
+
     <p>The Base Knight game trains you on the basic knight moves.</p>
     <h3>fork knight</h3>
     <p>coming soon - find the square that forks two pieces</p>
