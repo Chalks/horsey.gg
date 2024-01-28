@@ -1,4 +1,3 @@
-import {save as sjwtSave} from 'sjwt';
 import getKnightDistance from '../getKnightDistance.js';
 
 export default class BaseStat {
