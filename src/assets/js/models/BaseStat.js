@@ -42,19 +42,6 @@ export default class BaseStat {
         this.optimalMoves = getKnightDistance(start, end);
     }
 
-    save() {
-        // TODO FIXME this overwrites everything right now
-        sjwtSave({
-            privateData: {
-                saveFile: {
-                    baseStats: {
-                        ...this.serialize(),
-                    },
-                },
-            },
-        });
-    }
-
     serialize() {
         return {
             [this.date]: [
