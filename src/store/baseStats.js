@@ -5,8 +5,9 @@ import {useUserStore} from 'store/user.js';
 
 // eslint-disable-next-line import/prefer-default-export
 export const useBaseStatsStore = defineStore('baseStatsStore', () => {
-    const {saveFile} = useUserStore();
-    const games = computed(() => Object.values(saveFile.baseStats));
+    const userStore = useUserStore();
+
+    const games = computed(() => Object.values(userStore.saveFile?.baseStats ?? {}));
 
     const allGames = computed(() => games.value.length);
 

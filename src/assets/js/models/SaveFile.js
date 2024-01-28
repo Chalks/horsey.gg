@@ -33,7 +33,7 @@ export default class SaveFile {
             privateData: {
                 saveFile: {
                     baseStats: {
-                        ...this.serialize(),
+                        ...baseStat.serialize(),
                     },
                 },
             },

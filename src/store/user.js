@@ -10,12 +10,21 @@ export const useUserStore = defineStore('userStore', () => {
 
     function setUser(newUser) {
         user.value = newUser;
+
+        // TODO FIXME remove this when we feel confident about our save system
+        if (localStorage.getItem('panic') === 'true') {
+            saveFile.value = new SaveFile();
+            return;
+        }
+
         if (newUser?.privateData?.saveFile) {
             saveFile.value = new SaveFile(SaveFile
                 .deserialize(newUser.privateData.saveFile));
         } else {
             saveFile.value = new SaveFile();
-            saveFile.value.save();
+            if (user.value) {
+                saveFile.value.save();
+            }
         }
     }
 

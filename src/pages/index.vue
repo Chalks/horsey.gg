@@ -21,8 +21,7 @@ const reset = () => {
 };
 
 const handleWin = (winData) => {
-    const {saveFile} = userStore;
-    saveFile.addBaseStat(new BaseStat({
+    userStore.saveFile.addBaseStat(new BaseStat({
         start: start.value,
         end: end.value,
         moves: winData.moves,
