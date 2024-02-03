@@ -69,7 +69,9 @@ onMounted(() => {
         @invalid-move="handleInvalidMove"
     />
 
-    <StatsDisplay base-knight />
+    <div class="mt-4">
+        <StatsDisplay />
+    </div>
 
     <p>
         Reset stats, test mode only:

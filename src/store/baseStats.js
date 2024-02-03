@@ -23,6 +23,10 @@ export const useBaseStatsStore = defineStore('baseStatsStore', () => {
     const allTime = computed(() => games.value
         .reduce((acc, {ms}) => acc + ms, 0));
 
+    const allTimesSorted = computed(() => games.value
+        .map(({ms}) => ms)
+        .sort((a, b) => a - b));
+
     /*
     const rollingMoves = ref([]);
     const rollingInvalidMoves = ref([]);
@@ -40,6 +44,15 @@ export const useBaseStatsStore = defineStore('baseStatsStore', () => {
         const rt = rollingTime.value.reduce((acc, val) => acc + val, 0);
         */
 
+        const timePercentage = Math.floor(allTimesSorted.value.length * 0.1);
+        const averageFastestTime = allTimesSorted.value
+            .slice(0, timePercentage)
+            .reduce((acc, time) => acc + time, 0) / timePercentage;
+
+        const averageSlowestTime = allTimesSorted.value
+            .slice(-1 * timePercentage)
+            .reduce((acc, time) => acc + time, 0) / timePercentage;
+
         return {
             // global stats
             allGames: allGames.value,
@@ -48,10 +61,14 @@ export const useBaseStatsStore = defineStore('baseStatsStore', () => {
             allOptimalMoves: allOptimalMoves.value,
             allTime: allTime.value,
 
+            bestMoveRatio: allOptimalMoves.value / allMoves.value,
+
             // calculated global stats
-            allAverageTimePerTotalMoves: allTime.value / (allMoves.value + allInvalidMoves.value),
-            allAverageTimePerValidMoves: allTime.value / allMoves.value,
+            allAverageTimePerTotalMove: allTime.value / (allMoves.value + allInvalidMoves.value),
+            allAverageTimePerValidMove: allTime.value / allMoves.value,
             allAverageTimePerGame: allTime.value / allGames.value,
+            averageFastestTime,
+            averageSlowestTime,
 
             /*
             // rolling stats

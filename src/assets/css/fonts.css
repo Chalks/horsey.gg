@@ -1,0 +1,18 @@
+@tailwind utilities;
+@font-face {
+    font-family: 'Luckiest Guy';
+    font-style: normal;
+    font-display: block;
+    font-weight: 400;
+    src:
+        local('Luckiest Guy'),
+        url('/fonts/luckiest-guy.ttf') format('truetype');
+}
+
+@layer utilities {
+    .stat {
+        font-family: "Luckiest Guy", sans-serif;
+        @apply tracking-widest;
+    }
+}
+

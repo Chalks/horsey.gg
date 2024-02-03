@@ -20,6 +20,7 @@ export default defineNuxtConfig({
     css: [
         '~/assets/css/tailwind.css',
         '~/assets/css/iconify.css',
+        '~/assets/css/fonts.css',
     ],
 
     modules: [
@@ -64,6 +65,13 @@ export default defineNuxtConfig({
                     type: 'image/png',
                     sizes: '96x96',
                     href: '/favicon-96x96.png',
+                },
+                {
+                    rel: 'preload',
+                    href: '/fonts/luckiest-guy.ttf',
+                    as: 'font',
+                    type: 'font/ttf',
+                    crossorigin: '',
                 },
             ],
         },
