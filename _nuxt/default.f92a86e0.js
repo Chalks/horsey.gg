@@ -1,1 +1,0 @@
-import{J as o,o as s,f as t,i as r}from"./entry.714c30ec.js";const a={},c={class:"prose prose-blue mx-auto"};function n(e,l){return s(),t("div",c,[r(e.$slots,"default")])}const f=o(a,[["render",n]]);export{f as default};
