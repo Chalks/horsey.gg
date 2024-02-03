@@ -9,7 +9,11 @@ const {baseStats} = storeToRefs(baseStatsStore);
 
 <template>
     <h3>Lifetime Statistics</h3>
-    <div class="flex flex-col gap-4">
+    <div v-if="baseStats.allGames < 10">
+        Play at least {{ 10 - baseStats.allGames }} more games to see statistics!
+    </div>
+
+    <div v-else class="flex flex-col gap-4">
         <StatItem
             label="SPEED"
             :value="[
