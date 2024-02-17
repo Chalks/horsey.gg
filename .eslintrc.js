@@ -10,6 +10,7 @@ module.exports = {
         useNuxtApp: 'readonly',
         useRoute: 'readonly',
         useRouter: 'readonly',
+        useSeoMeta: 'readonly',
         navigateTo: 'readonly',
         useFetch: 'readonly',
         $fetch: 'readonly',
@@ -18,6 +19,7 @@ module.exports = {
         useHead: 'readonly',
         onMounted: 'readonly',
         watch: 'readonly',
+        seo: 'readonly',
     },
     parserOptions: {
         requireConfigFile: false,

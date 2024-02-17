@@ -2,6 +2,10 @@
 import {logout} from 'sjwt';
 import {useUserStore} from 'store/user.js';
 
+seo({
+    pageTitle: 'logout - horsey.gg',
+});
+
 onMounted(async () => {
     await logout();
     useUserStore().setUser(null);

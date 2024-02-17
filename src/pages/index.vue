@@ -3,6 +3,10 @@ import BaseStat from 'assets/js/models/BaseStat.js';
 import {useUserStore} from 'store/user.js';
 import getRandomSquare from 'assets/js/getRandomSquare.js';
 
+seo({
+    pageTitle: 'horsey.gg',
+});
+
 const userStore = useUserStore();
 
 const piece = ref(null);
