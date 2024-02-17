@@ -62,6 +62,5 @@ const showLifetimeStats = computed(() => baseStats.value.allGames >= LIFETIME_MI
             -->
         </div>
     </div>
-
-    <pre class="mb-0">{{ baseStats }}</pre>
+    <!-- <pre class="mb-0">{{ baseStats }}</pre> -->
 </template>

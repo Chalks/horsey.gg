@@ -2,6 +2,10 @@
 import {register, sjwt, save} from 'sjwt';
 import {useUserStore} from 'store/user.js';
 
+seo({
+    pageTitle: 'register - horsey.gg',
+});
+
 const displayName = ref('');
 const email = ref('');
 const password = ref('');
