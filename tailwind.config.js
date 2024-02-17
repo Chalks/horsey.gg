@@ -18,7 +18,11 @@ module.exports = {
             padding: '2rem',
         },
 
-        extend: {},
+        extend: {
+            colors: {
+                horse: '#5D9945',
+            },
+        },
     },
 
     variants: {
