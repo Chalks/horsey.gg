@@ -67,6 +67,10 @@ export default defineNuxtConfig({
         },
     },
 
+    build: {
+        transpile: ['cm-chessboard'],
+    },
+
     srcDir: 'src/',
 
     ssr: true,
