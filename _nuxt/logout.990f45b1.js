@@ -1,1 +1,0 @@
-import{e as o,G as t,m as s,o as a,f as n,F as l,h as e}from"./entry.adcaf4c0.js";const u=e("h1",null,"Logout",-1),r=e("p",null,"Why would you do that.",-1),m={__name:"logout",setup(c){return o(async()=>{await t(),s().setUser(null)}),(_,d)=>(a(),n(l,null,[u,r],64))}};export{m as default};
