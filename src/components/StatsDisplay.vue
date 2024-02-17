@@ -14,8 +14,8 @@ const showRollingTeaser = computed(() => baseStats.value.allGames >= (LIFETIME_M
     && baseStats.value.allGames < ROLLING_MINIMUM);
 const showRollingStats = computed(() => baseStats.value.allGames >= ROLLING_MINIMUM);
 
-const showLifetimeTitle = computed(() => baseStats.value.allGames > 0);
-const showLifetimeTeaser = computed(() => baseStats.value.allGames > 0
+const showLifetimeTitle = computed(() => baseStats.value.allGames >= 0);
+const showLifetimeTeaser = computed(() => baseStats.value.allGames >= 0
     && baseStats.value.allGames < LIFETIME_MINIMUM);
 const showLifetimeStats = computed(() => baseStats.value.allGames >= LIFETIME_MINIMUM);
 </script>
