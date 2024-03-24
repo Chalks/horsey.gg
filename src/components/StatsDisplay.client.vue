@@ -37,6 +37,17 @@ const showLifetimeStats = computed(() => baseStats.value.allGames >= LIFETIME_MI
 
         <div v-if="showLifetimeStats" class="flex flex-col gap-4">
             <StatItem
+                label="GAMES"
+                :value="[
+                    'You have played',
+                    baseStats.allGames,
+                    'games. Wow.',
+                ]"
+                count
+                lower-is-better
+            />
+
+            <StatItem
                 label="SPEED"
                 :value="[
                     baseStats.allAverageFastestTimePerMove,
@@ -49,7 +60,7 @@ const showLifetimeStats = computed(() => baseStats.value.allGames >= LIFETIME_MI
 
             <StatItem
                 label="ACCURACY"
-                :value="baseStats.allBestMoveRatio"
+                :value="[baseStats.allBestMoveRatio]"
                 ratio
                 higher-is-better
             />

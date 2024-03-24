@@ -6,7 +6,7 @@ const props = defineProps({
     },
 
     value: {
-        type: Number,
+        type: Array,
         required: true,
     },
 
@@ -16,6 +16,11 @@ const props = defineProps({
     },
 
     speed: {
+        type: Boolean,
+        default: false,
+    },
+
+    count: {
         type: Boolean,
         default: false,
     },
@@ -41,17 +46,25 @@ const offset = computed(() => {
         return ((actual - fastest) / (slowest - fastest)) * 100;
     }
 
+    if (props.count) {
+        return 0;
+    }
+
     return 50; // default to 50%
 });
 
 const formattedValue = computed(() => {
     if (props.ratio) {
-        return `${(100 * props.value).toPrecision(4)}% optimal moves`;
+        return `${(100 * props.value[0]).toPrecision(4)}% optimal moves`;
     }
 
     if (props.speed) {
         const [fastest, actual, slowest] = props.value;
         return `${(actual).toFixed(2)} ms / game (${(slowest).toFixed(2)} avg slowest, ${(fastest).toFixed(2)} avg fastest)`;
+    }
+
+    if (props.count) {
+        return props.value.join(' ');
     }
 
     return props.value;
@@ -66,7 +79,10 @@ const formattedValue = computed(() => {
         </div>
         <div class="bg-green-900 h-4 w-full relative">
             <div
-                class="absolute top-0 bottom-0 left-0 rounded-r-full bg-green-700 flex items-center px-4 transition-all"
+                class="absolute top-0 bottom-0 left-0 bg-green-700 flex items-center px-4 transition-all"
+                :class="{
+                    'rounded-r-full': offset > 0,
+                }"
                 :style="{
                     right: `${offset}%`,
                 }"
