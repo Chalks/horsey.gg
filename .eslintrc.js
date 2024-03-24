@@ -12,6 +12,7 @@ module.exports = {
         useRouter: 'readonly',
         useSeoMeta: 'readonly',
         navigateTo: 'readonly',
+        nextTick: 'readonly',
         useFetch: 'readonly',
         $fetch: 'readonly',
         ref: 'readonly',

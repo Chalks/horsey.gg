@@ -4,8 +4,8 @@ const files = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
 const ranks = ['1', '2', '3', '4', '5', '6', '7', '8'];
 
 export default (piece, square) => {
-    if (!square) return [];
     if (!piece) return [];
+    if (!square) return [];
 
     // only works for knights right now
     if (piece !== PIECE.bn && piece !== PIECE.wn) return [];

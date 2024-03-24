@@ -1,7 +1,5 @@
 <script setup>
-import BaseStat from 'assets/js/models/BaseStat.js';
 import {useUserStore} from 'store/user.js';
-import getRandomSquare from 'assets/js/getRandomSquare.js';
 
 seo({
     pageTitle: 'horsey.gg',
@@ -9,69 +7,14 @@ seo({
 
 const userStore = useUserStore();
 
-const piece = ref(null);
-const start = ref(null);
-const end = ref(null);
-
-const reset = () => {
-    piece.value = ['bn', 'wn'][Math.floor(Math.random() * 2)];
-    start.value = getRandomSquare();
-
-    let tmp = getRandomSquare();
-    while (tmp === start.value) {
-        tmp = getRandomSquare();
-    }
-    end.value = tmp;
-};
-
-const handleWin = (winData) => {
-    userStore.saveFile.addBaseStat(new BaseStat({
-        start: start.value,
-        end: end.value,
-        moves: winData.moves,
-        invalidMoves: winData.invalidMoves,
-        ms: winData.ms,
-        date: Date.now(),
-    }));
-    reset();
-};
-
-const handleMove = (e) => {
-    // eslint-disable-next-line
-    console.log('move: ', e);
-};
-
-const handleInvalidMove = (e) => {
-    // eslint-disable-next-line
-    console.log('invalid move: ', e);
-};
-
-const handleStart = () => {
-    // eslint-disable-next-line
-    console.log('started');
-};
-
 const resetStats = () => {
     userStore.saveFile.resetBaseStats();
 };
-
-onMounted(() => {
-    reset();
-});
 </script>
 
 <template>
-    <h1>Base Knight</h1>
-    <ChessBoard
-        show-legal-moves
-        :piece="piece"
-        :start="start"
-        :end="end"
-        @start="handleStart"
-        @win="handleWin"
-        @move="handleMove"
-        @invalid-move="handleInvalidMove"
-    />
+    <h1>Base Horsey</h1>
+    <GameBaseHorsey />
 
     <div class="xl:fixed xl:right-0 xl:top-0 xl:bottom-0 xl:w-full xl:max-w-side xl:overflow-auto z-50">
         <div class="xl:mx-4 xl:mt-[10.5rem]">
