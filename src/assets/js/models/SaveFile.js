@@ -1,21 +1,28 @@
 import {save as sjwtSave} from 'sjwt';
+import {EASY} from 'assets/js/constants.js';
 import BaseStat from './BaseStat.js';
 
 export default class SaveFile {
+    selectedDifficulty;
     baseStats;
 
     constructor({
+        selectedDifficulty = EASY,
         baseStats = {},
     } = {}) {
+        this.selectedDifficulty = selectedDifficulty;
         this.baseStats = baseStats;
     }
 
     resetBaseStats() {
+        this.selectedDifficulty = EASY;
         this.baseStats = {};
+
         sjwtSave({
             overwrite: true,
             privateData: {
                 saveFile: {
+                    selectedDifficulty: EASY,
                     baseStats: this.baseStats,
                     // this.somethingStats,
                     // this.fooStats,
@@ -23,6 +30,10 @@ export default class SaveFile {
                 },
             },
         });
+    }
+
+    setDifficulty(difficulty) {
+        this.selectedDifficulty = difficulty;
     }
 
     addBaseStat(baseStat) {
@@ -50,6 +61,7 @@ export default class SaveFile {
 
     serialize() {
         return {
+            selectedDifficulty: this.selectedDifficulty,
             baseStats: Object.keys(this.baseStats)
                 .reduce((acc, date) => ({
                     ...acc,
@@ -59,9 +71,11 @@ export default class SaveFile {
     }
 
     static deserialize({
+        selectedDifficulty = EASY,
         baseStats = {},
     } = {}) {
         return new SaveFile({
+            selectedDifficulty,
             baseStats: Object.keys(baseStats)
                 .reduce((acc, date) => {
                     acc[date] = BaseStat.deserialize({

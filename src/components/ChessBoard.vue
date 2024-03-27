@@ -141,7 +141,6 @@ const ready = () => {
 const stop = () => {
     destroyBoard();
     createBoard();
-    horseyLoc.value = null;
     playing.value = false;
 };
 

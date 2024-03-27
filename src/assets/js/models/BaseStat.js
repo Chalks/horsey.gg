@@ -1,6 +1,9 @@
+import {EASY} from 'assets/js/constants.js';
 import getKnightDistance from '../getKnightDistance.js';
 
 export default class BaseStat {
+    difficulty;
+
     start;
 
     end;
@@ -22,6 +25,7 @@ export default class BaseStat {
         invalidMoves,
         ms,
         date,
+        difficulty = EASY,
     }) {
         if (start === undefined
             || end === undefined
@@ -29,6 +33,7 @@ export default class BaseStat {
             || invalidMoves === undefined
             || ms === undefined
             || date === undefined
+            || difficulty === undefined
         ) {
             throw new Error('invalid arguments');
         }
@@ -39,6 +44,7 @@ export default class BaseStat {
         this.ms = ms;
         this.date = date;
         this.optimalMoves = getKnightDistance(start, end);
+        this.difficulty = difficulty;
     }
 
     serialize() {
@@ -49,6 +55,7 @@ export default class BaseStat {
                 this.moves,
                 this.invalidMoves,
                 this.ms,
+                this.difficulty,
             ],
         };
     }
@@ -67,6 +74,7 @@ export default class BaseStat {
             moves,
             invalidMoves,
             ms,
+            difficulty,
         ] = data[date];
 
         return new BaseStat({
@@ -76,6 +84,7 @@ export default class BaseStat {
             invalidMoves,
             ms,
             date: Number(date),
+            difficulty,
         });
     }
 }

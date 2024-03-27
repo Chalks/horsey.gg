@@ -1,5 +1,6 @@
 import {defineStore} from 'pinia';
 import {useUserStore} from 'store/user.js';
+import {EASY} from 'assets/js/constants.js';
 
 // const ROLLING = 100;
 
@@ -7,7 +8,12 @@ import {useUserStore} from 'store/user.js';
 export const useBaseStatsStore = defineStore('baseStatsStore', () => {
     const userStore = useUserStore();
 
-    const games = computed(() => Object.values(userStore.saveFile?.baseStats ?? {}));
+    const difficulty = computed(() => userStore.saveFile?.selectedDifficulty ?? EASY);
+
+    const games = computed(() => {
+        const baseStats = Object.values(userStore.saveFile?.baseStats ?? {});
+        return baseStats.filter(({difficulty: gameDifficulty}) => gameDifficulty === difficulty.value);
+    });
 
     const allGames = computed(() => games.value.length);
 
@@ -94,6 +100,7 @@ export const useBaseStatsStore = defineStore('baseStatsStore', () => {
 
     return {
         baseStats,
+        difficulty,
     };
 });
 

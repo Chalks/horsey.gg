@@ -1,4 +1,5 @@
 import {defineStore} from 'pinia';
+import {EASY} from 'assets/js/constants.js';
 import SaveFile from 'assets/js/models/SaveFile.js';
 
 // eslint-disable-next-line import/prefer-default-export
@@ -7,6 +8,7 @@ export const useUserStore = defineStore('userStore', () => {
     const saveFile = ref(null);
 
     const isAuthenticated = computed(() => user.value != null);
+    const selectedDifficulty = computed(() => saveFile.value?.selectedDifficulty ?? EASY);
 
     function setUser(newUser) {
         user.value = newUser;
@@ -28,9 +30,16 @@ export const useUserStore = defineStore('userStore', () => {
         }
     }
 
+    function setDifficulty(difficulty) {
+        saveFile.value.setDifficulty(difficulty);
+        saveFile.value.save();
+    }
+
     return {
         isAuthenticated,
         saveFile,
+        selectedDifficulty,
+        setDifficulty,
         setUser,
         user,
     };

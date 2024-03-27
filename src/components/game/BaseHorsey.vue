@@ -1,13 +1,16 @@
 <script setup>
 import BaseStat from 'assets/js/models/BaseStat.js';
+import {EASY} from 'assets/js/constants.js';
 import {useUserStore} from 'store/user.js';
 import getRandomSquare from 'assets/js/getRandomSquare.js';
 
 const board = ref(null);
-const showLegalMoves = ref(false);
 const goalMarkers = ref([]);
 const userStore = useUserStore();
 let stats;
+
+// difficulty modifiers
+const showLegalMoves = computed(() => userStore.selectedDifficulty <= EASY);
 
 const resetStats = () => {
     stats = {
@@ -19,6 +22,17 @@ const resetStats = () => {
         endPerformance: 0,
         ms: 0,
     };
+};
+
+const handleWin = () => {
+    userStore.saveFile.addBaseStat(new BaseStat({
+        ...stats,
+        difficulty: userStore.selectedDifficulty,
+        date: Date.now(),
+    }));
+
+    resetStats();
+    board.value.stop();
 };
 
 const handleStart = async () => {
@@ -49,13 +63,7 @@ const handleMove = ({from, to}) => {
         stats.endPerformance = performance.now();
         stats.ms = stats.endPerformance - stats.startPerformance;
 
-        userStore.saveFile.addBaseStat(new BaseStat({
-            ...stats,
-            date: Date.now(),
-        }));
-
-        resetStats();
-        board.value.stop();
+        handleWin();
     }
 };
 
@@ -65,6 +73,8 @@ const handleInvalidMove = () => {
 </script>
 
 <template>
+    <GameDifficultyToggle easy dang class="mb-2" />
+
     <ChessBoard
         ref="board"
         :show-legal-moves="showLegalMoves"
