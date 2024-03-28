@@ -21,6 +21,9 @@ module.exports = {
         extend: {
             colors: {
                 horse: '#5D9945',
+                easy: colors.green['100'],
+                dang: colors.yellow['100'],
+                damn: colors.red['100'],
             },
         },
     },

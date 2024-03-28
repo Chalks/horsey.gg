@@ -17,11 +17,11 @@ const setDamn = () => { userStore.setDifficulty(DAMN); };
 <template>
     <div>
         <label class="text-xs uppercase tracking-widest">Difficulty</label>
-        <div class="flex border rounded overflow-hidden">
+        <div class="flex">
             <div
                 v-if="easy"
-                class="cursor-pointer px-2 grow text-center select-none border-l first:border-none"
-                :class="{'bg-green-300': userStore.selectedDifficulty === EASY}"
+                class="cursor-pointer text-sm font-bold p-1 grow text-center select-none"
+                :class="{'bg-easy': userStore.selectedDifficulty === EASY}"
                 @click="setEasy"
             >
                 EASY
@@ -29,8 +29,8 @@ const setDamn = () => { userStore.setDifficulty(DAMN); };
 
             <div
                 v-if="dang"
-                class="cursor-pointer px-2 grow text-center select-none border-l first:border-none"
-                :class="{'bg-yellow-300': userStore.selectedDifficulty === DANG}"
+                class="cursor-pointer text-sm font-bold p-1 grow text-center select-none"
+                :class="{'bg-dang': userStore.selectedDifficulty === DANG}"
                 @click="setDang"
             >
                 DANG
@@ -38,8 +38,8 @@ const setDamn = () => { userStore.setDifficulty(DAMN); };
 
             <div
                 v-if="damn"
-                class="cursor-pointer px-2 grow text-center select-none border-l first:border-none"
-                :class="{'bg-red-300': userStore.selectedDifficulty === DAMN}"
+                class="cursor-pointer text-sm font-bold p-1 grow text-center select-none"
+                :class="{'bg-damn': userStore.selectedDifficulty === DAMN}"
                 @click="setDamn"
             >
                 DAMN

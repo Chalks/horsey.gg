@@ -73,12 +73,23 @@ const handleInvalidMove = () => {
 </script>
 
 <template>
-    <GameDifficultyToggle easy dang class="mb-2" />
+    <div>
+        <GameDifficultyToggle easy dang />
+
+        <GameDifficultyDescription easy>
+            Show legal moves
+        </GameDifficultyDescription>
+
+        <GameDifficultyDescription dang>
+            Hide legal moves
+        </GameDifficultyDescription>
+    </div>
 
     <ChessBoard
         ref="board"
         :show-legal-moves="showLegalMoves"
         :goal-markers="goalMarkers"
+        class="mt-2"
         @start="handleStart"
         @move="handleMove"
         @invalid-move="handleInvalidMove"
