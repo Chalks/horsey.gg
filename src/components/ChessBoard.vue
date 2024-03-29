@@ -1,11 +1,11 @@
 <script setup>
 import getRandomSquare from 'assets/js/getRandomSquare.js';
+import getValidSquares from 'assets/js/getValidSquares.js';
+
 import {Chessboard} from 'cm-chessboard';
 import {MARKER_TYPE, Markers} from 'cm-chessboard/src/extensions/markers/Markers.js';
 import 'cm-chessboard/assets/chessboard.css';
 import 'cm-chessboard/assets/extensions/markers/markers.css';
-
-import getValidSquares from '~/assets/js/getValidSquares.js';
 
 const props = defineProps({
     start: {type: String, default: null},

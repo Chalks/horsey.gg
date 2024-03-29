@@ -5,6 +5,8 @@ import {
     it,
 } from 'vitest';
 
+import {EASY, DANG} from 'assets/js/constants.js';
+
 import SaveFile from './SaveFile.js';
 import BaseStat from './BaseStat.js';
 
@@ -32,6 +34,7 @@ describe('SaveFile', () => {
         const date2 = date - 10000;
 
         validDeserialized = new SaveFile({
+            selectedDifficulty: DANG,
             baseStats: {
                 [date]: new BaseStat({
                     start: 'a1',
@@ -40,6 +43,7 @@ describe('SaveFile', () => {
                     invalidMoves: 0,
                     ms: 4000,
                     date,
+                    difficulty: EASY,
                 }),
                 [date2]: new BaseStat({
                     start: 'b1',
@@ -48,11 +52,13 @@ describe('SaveFile', () => {
                     invalidMoves: 1,
                     ms: 8000,
                     date: date2,
+                    difficulty: EASY,
                 }),
             },
         });
 
         validSerialized = {
+            selectedDifficulty: DANG,
             baseStats: {
                 [validDeserialized.baseStats[date].date]: [
                     validDeserialized.baseStats[date].start,
@@ -60,6 +66,7 @@ describe('SaveFile', () => {
                     validDeserialized.baseStats[date].moves,
                     validDeserialized.baseStats[date].invalidMoves,
                     validDeserialized.baseStats[date].ms,
+                    validDeserialized.baseStats[date].difficulty,
                 ],
                 [validDeserialized.baseStats[date2].date]: [
                     validDeserialized.baseStats[date2].start,
@@ -67,6 +74,7 @@ describe('SaveFile', () => {
                     validDeserialized.baseStats[date2].moves,
                     validDeserialized.baseStats[date2].invalidMoves,
                     validDeserialized.baseStats[date2].ms,
+                    validDeserialized.baseStats[date2].difficulty,
                 ],
             },
         };

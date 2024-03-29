@@ -5,6 +5,8 @@ import {
     it,
 } from 'vitest';
 
+import {EASY, DANG} from 'assets/js/constants.js';
+
 import BaseStat from './BaseStat.js';
 
 describe('BaseStat', () => {
@@ -29,6 +31,7 @@ describe('BaseStat', () => {
             invalidMoves: 0,
             ms: 4000,
             date: Date.now(),
+            difficulty: EASY,
         });
 
         validSerialized = {
@@ -38,6 +41,7 @@ describe('BaseStat', () => {
                 validDeserialized.moves,
                 validDeserialized.invalidMoves,
                 validDeserialized.ms,
+                validDeserialized.difficulty,
             ],
         };
     });
@@ -59,8 +63,21 @@ describe('BaseStat', () => {
         expect(() => new BaseStat(validDeserialized)).toThrowError();
     });
 
-    it('Can construct if everything is defined', () => {
+    it('Can construct if everything other than difficulty is defined', () => {
+        delete validDeserialized.difficulty;
         expect(() => new BaseStat(validDeserialized)).not.toThrowError();
+    });
+
+    it('fills in a default EASY difficulty if difficulty is undefined', () => {
+        delete validDeserialized.difficulty;
+        const result = new BaseStat(validDeserialized);
+        expect(result.difficulty).toBe(EASY);
+    });
+
+    it('Uses difficulty if provided', () => {
+        validDeserialized.difficulty = DANG;
+        const result = new BaseStat(validDeserialized);
+        expect(result.difficulty).toBe(DANG);
     });
 
     it('Can construct from itself', () => {
