@@ -2,14 +2,22 @@
 import getRandomSquare from 'assets/js/getRandomSquare.js';
 import getValidSquares from 'assets/js/getValidSquares.js';
 
+import {
+    HOVER_MARKER,
+    MOVE_MARKER,
+    GOAL_MARKER,
+    DISABLED_MARKER,
+} from 'assets/js/constants.js';
+
 import {Chessboard} from 'cm-chessboard';
-import {MARKER_TYPE, Markers} from 'cm-chessboard/src/extensions/markers/Markers.js';
+import {Markers} from 'cm-chessboard/src/extensions/markers/Markers.js';
 import 'cm-chessboard/assets/chessboard.css';
 import 'cm-chessboard/assets/extensions/markers/markers.css';
 
 const props = defineProps({
     start: {type: String, default: null},
-    goalMarkers: {type: Array, default: () => []},
+    goalSquares: {type: Array, default: () => []},
+    disableLegalMoves: {type: Number, default: 0},
     // pieces: {type: Array, default: []},
     showLegalMoves: {type: Boolean, default: false},
 });
@@ -20,13 +28,22 @@ let board = null;
 const boardEl = ref(null);
 const horsey = ref(null);
 const horseyLoc = ref(null);
-const movementSquares = computed(() => getValidSquares(horsey.value, horseyLoc.value));
+
+const validSquares = computed(() => getValidSquares(horsey.value, horseyLoc.value));
+
+const disabledSquares = computed(() => {
+    const validNonGoalSquares = validSquares.value.filter((square) => !props.goalSquares.includes(square));
+    const maxAllowedToRemove = Math.min(validSquares.value.length - 1, validNonGoalSquares.length);
+    const shuffled = validNonGoalSquares.sort(() => 0.5 - Math.random());
+    const n = Math.min(props.disableLegalMoves, maxAllowedToRemove);
+    return shuffled.slice(0, n);
+});
+
+const movementSquares = computed(() => validSquares.value
+    .filter((square) => !disabledSquares.value.includes(square)));
+
 const playing = ref(false);
 // let friendlyColor = null;
-
-const HOVER_MARKER = MARKER_TYPE.frame;
-const MOVE_MARKER = MARKER_TYPE.dot;
-const GOAL_MARKER = MARKER_TYPE.circlePrimary;
 
 const handleMouseover = (event) => {
     if (!board) return;
@@ -87,7 +104,7 @@ const createHorsey = () => {
     // friendlyColor = horsey.value === 'bn' ? 'b' : 'w';
 
     let loc = props.start || getRandomSquare();
-    while (props.goalMarkers.includes(loc)) {
+    while (props.goalSquares.includes(loc)) {
         loc = getRandomSquare();
     }
     horseyLoc.value = loc;
@@ -99,7 +116,7 @@ const drawGoalMarkers = () => {
 
     board.removeMarkers(GOAL_MARKER);
 
-    props.goalMarkers.forEach((square) => {
+    props.goalSquares.forEach((square) => {
         board.addMarker(GOAL_MARKER, square);
     });
 };
@@ -116,8 +133,19 @@ const drawLegalMoves = () => {
     }
 };
 
+const drawDisabledMoves = () => {
+    if (!board) return;
+
+    board.removeMarkers(DISABLED_MARKER);
+
+    disabledSquares.value.forEach((square) => {
+        board.addMarker(DISABLED_MARKER, square);
+    });
+};
+
 watch(horseyLoc, () => {
     drawLegalMoves();
+    drawDisabledMoves();
 });
 
 onMounted(() => {
@@ -136,9 +164,11 @@ const ready = () => {
     createHorsey();
     drawGoalMarkers();
     drawLegalMoves();
+    drawDisabledMoves();
 };
 
 const stop = () => {
+    board?.removeMarkers();
     destroyBoard();
     createBoard();
     playing.value = false;

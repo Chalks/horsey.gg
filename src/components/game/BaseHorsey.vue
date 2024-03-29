@@ -1,16 +1,36 @@
 <script setup>
 import BaseStat from 'assets/js/models/BaseStat.js';
-import {EASY} from 'assets/js/constants.js';
+import {
+    EASY,
+    DAMN,
+    FUCK,
+    EVIL,
+} from 'assets/js/constants.js';
 import {useUserStore} from 'store/user.js';
 import getRandomSquare from 'assets/js/getRandomSquare.js';
 
 const board = ref(null);
-const goalMarkers = ref([]);
+const goalSquares = ref([]);
 const userStore = useUserStore();
 let stats;
 
 // difficulty modifiers
 const showLegalMoves = computed(() => userStore.selectedDifficulty <= EASY);
+const disableLegalMoves = computed(() => {
+    if (userStore.selectedDifficulty === DAMN) {
+        return 1;
+    }
+
+    if (userStore.selectedDifficulty === FUCK) {
+        return 2;
+    }
+
+    if (userStore.selectedDifficulty === EVIL) {
+        return 3;
+    }
+
+    return 0;
+});
 
 const resetStats = () => {
     stats = {
@@ -39,10 +59,10 @@ const handleStart = async () => {
     resetStats();
 
     // create goal
-    goalMarkers.value = [getRandomSquare()];
+    goalSquares.value = [getRandomSquare()];
 
     // record initial stats
-    stats.end = goalMarkers.value[0];
+    stats.end = goalSquares.value[0];
     stats.startPerformance = performance.now();
 
     // draw the board
@@ -58,7 +78,7 @@ const handleMove = ({from, to}) => {
 
     stats.moves += 1;
 
-    if (goalMarkers.value[0] === to) {
+    if (goalSquares.value[0] === to) {
         // on the last move we can calculate timing
         stats.endPerformance = performance.now();
         stats.ms = stats.endPerformance - stats.startPerformance;
@@ -74,21 +94,40 @@ const handleInvalidMove = () => {
 
 <template>
     <div>
-        <GameDifficultyToggle easy dang />
+        <GameDifficultyToggle
+            easy
+            dang
+            damn
+            fuck
+            evil
+        />
 
         <GameDifficultyDescription easy>
             Show legal moves
         </GameDifficultyDescription>
 
-        <GameDifficultyDescription dang>
+        <GameDifficultyDescription dang damn fuck evil>
             Hide legal moves
+        </GameDifficultyDescription>
+
+        <GameDifficultyDescription damn fuck evil>
+            Disable one legal move
+        </GameDifficultyDescription>
+
+        <GameDifficultyDescription fuck evil>
+            Disable one more legal move
+        </GameDifficultyDescription>
+
+        <GameDifficultyDescription evil>
+            Disable one more legal move
         </GameDifficultyDescription>
     </div>
 
     <ChessBoard
         ref="board"
         :show-legal-moves="showLegalMoves"
-        :goal-markers="goalMarkers"
+        :disable-legal-moves="disableLegalMoves"
+        :goal-squares="goalSquares"
         class="mt-2"
         @start="handleStart"
         @move="handleMove"

@@ -24,6 +24,8 @@ module.exports = {
                 easy: colors.green['100'],
                 dang: colors.yellow['100'],
                 damn: colors.red['100'],
+                fuck: colors.red['400'],
+                evil: colors.red['700'],
             },
         },
     },
