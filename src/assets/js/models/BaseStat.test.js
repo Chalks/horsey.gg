@@ -5,7 +5,7 @@ import {
     it,
 } from 'vitest';
 
-import {EASY, DANG} from 'assets/js/constants.js';
+import {GOSH, SHUCKS} from 'assets/js/constants.js';
 
 import BaseStat from './BaseStat.js';
 
@@ -31,7 +31,7 @@ describe('BaseStat', () => {
             invalidMoves: 0,
             ms: 4000,
             date: Date.now(),
-            difficulty: EASY,
+            difficulty: GOSH,
         });
 
         validSerialized = {
@@ -68,16 +68,16 @@ describe('BaseStat', () => {
         expect(() => new BaseStat(validDeserialized)).not.toThrowError();
     });
 
-    it('fills in a default EASY difficulty if difficulty is undefined', () => {
+    it('fills in a default GOSH difficulty if difficulty is undefined', () => {
         delete validDeserialized.difficulty;
         const result = new BaseStat(validDeserialized);
-        expect(result.difficulty).toBe(EASY);
+        expect(result.difficulty).toBe(GOSH);
     });
 
     it('Uses difficulty if provided', () => {
-        validDeserialized.difficulty = DANG;
+        validDeserialized.difficulty = SHUCKS;
         const result = new BaseStat(validDeserialized);
-        expect(result.difficulty).toBe(DANG);
+        expect(result.difficulty).toBe(SHUCKS);
     });
 
     it('Can construct from itself', () => {

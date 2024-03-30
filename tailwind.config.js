@@ -21,11 +21,12 @@ module.exports = {
         extend: {
             colors: {
                 horse: '#5D9945',
-                easy: colors.green['100'],
+                gosh: colors.green['100'],
+                shucks: colors.green['300'],
                 dang: colors.yellow['100'],
-                damn: colors.red['100'],
-                fuck: colors.red['400'],
-                evil: colors.red['700'],
+                darn: colors.yellow['300'],
+                heck: colors.red['100'],
+                frick: colors.red['300'],
             },
         },
     },

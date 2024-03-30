@@ -1,5 +1,5 @@
 import {save as sjwtSave} from 'sjwt';
-import {EASY} from 'assets/js/constants.js';
+import {GOSH} from 'assets/js/constants.js';
 import BaseStat from './BaseStat.js';
 
 export default class SaveFile {
@@ -7,7 +7,7 @@ export default class SaveFile {
     baseStats;
 
     constructor({
-        selectedDifficulty = EASY,
+        selectedDifficulty = GOSH,
         baseStats = {},
     } = {}) {
         this.selectedDifficulty = selectedDifficulty;
@@ -15,14 +15,14 @@ export default class SaveFile {
     }
 
     resetBaseStats() {
-        this.selectedDifficulty = EASY;
+        this.selectedDifficulty = GOSH;
         this.baseStats = {};
 
         sjwtSave({
             overwrite: true,
             privateData: {
                 saveFile: {
-                    selectedDifficulty: EASY,
+                    selectedDifficulty: GOSH,
                     baseStats: this.baseStats,
                     // this.somethingStats,
                     // this.fooStats,
@@ -71,7 +71,7 @@ export default class SaveFile {
     }
 
     static deserialize({
-        selectedDifficulty = EASY,
+        selectedDifficulty = GOSH,
         baseStats = {},
     } = {}) {
         return new SaveFile({

@@ -1,40 +1,45 @@
 <script setup>
 import {useUserStore} from 'store/user.js';
-import {
-    EASY,
-    DANG,
-    DAMN,
-    FUCK,
-    EVIL,
-} from 'assets/js/constants.js';
+import {GOSH, SHUCKS, DANG, DARN, HECK, FRICK} from 'assets/js/constants.js';
 
 const userStore = useUserStore();
 
 defineProps({
-    easy: {type: Boolean, default: false},
+    gosh: {type: Boolean, default: false},
+    shucks: {type: Boolean, default: false},
     dang: {type: Boolean, default: false},
-    damn: {type: Boolean, default: false},
-    fuck: {type: Boolean, default: false},
-    evil: {type: Boolean, default: false},
+    darn: {type: Boolean, default: false},
+    heck: {type: Boolean, default: false},
+    frick: {type: Boolean, default: false},
 });
 
-const setEasy = () => { userStore.setDifficulty(EASY); };
+const setGosh = () => { userStore.setDifficulty(GOSH); };
+const setShucks = () => { userStore.setDifficulty(SHUCKS); };
 const setDang = () => { userStore.setDifficulty(DANG); };
-const setDamn = () => { userStore.setDifficulty(DAMN); };
-const setFuck = () => { userStore.setDifficulty(FUCK); };
-const setEvil = () => { userStore.setDifficulty(EVIL); };
+const setDarn = () => { userStore.setDifficulty(DARN); };
+const setHeck = () => { userStore.setDifficulty(HECK); };
+const setFrick = () => { userStore.setDifficulty(FRICK); };
 </script>
 <template>
     <div>
         <label class="text-xs uppercase tracking-widest">Difficulty</label>
         <div class="flex">
             <div
-                v-if="easy"
+                v-if="gosh"
                 class="cursor-pointer text-sm font-bold p-1 grow text-center select-none"
-                :class="{'bg-easy': userStore.selectedDifficulty === EASY}"
-                @click="setEasy"
+                :class="{'bg-gosh': userStore.selectedDifficulty === GOSH}"
+                @click="setGosh"
             >
-                EASY
+                GOSH
+            </div>
+
+            <div
+                v-if="shucks"
+                class="cursor-pointer text-sm font-bold p-1 grow text-center select-none"
+                :class="{'bg-shucks': userStore.selectedDifficulty === SHUCKS}"
+                @click="setShucks"
+            >
+                SHUCKS
             </div>
 
             <div
@@ -47,30 +52,30 @@ const setEvil = () => { userStore.setDifficulty(EVIL); };
             </div>
 
             <div
-                v-if="damn"
+                v-if="darn"
                 class="cursor-pointer text-sm font-bold p-1 grow text-center select-none"
-                :class="{'bg-damn': userStore.selectedDifficulty === DAMN}"
-                @click="setDamn"
+                :class="{'bg-darn': userStore.selectedDifficulty === DARN}"
+                @click="setDarn"
             >
-                DAMN
+                DARN
             </div>
 
             <div
-                v-if="fuck"
+                v-if="heck"
                 class="cursor-pointer text-sm font-bold p-1 grow text-center select-none"
-                :class="{'bg-fuck': userStore.selectedDifficulty === FUCK}"
-                @click="setFuck"
+                :class="{'bg-heck': userStore.selectedDifficulty === HECK}"
+                @click="setHeck"
             >
-                FUCK
+                HECK
             </div>
 
             <div
-                v-if="evil"
+                v-if="frick"
                 class="cursor-pointer text-sm font-bold p-1 grow text-center select-none"
-                :class="{'bg-evil': userStore.selectedDifficulty === EVIL}"
-                @click="setEvil"
+                :class="{'bg-frick': userStore.selectedDifficulty === FRICK}"
+                @click="setFrick"
             >
-                EVIL
+                FRICK
             </div>
         </div>
     </div>

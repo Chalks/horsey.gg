@@ -1,11 +1,6 @@
 <script setup>
 import BaseStat from 'assets/js/models/BaseStat.js';
-import {
-    EASY,
-    DAMN,
-    FUCK,
-    EVIL,
-} from 'assets/js/constants.js';
+import {GOSH, DANG, DARN, HECK, FRICK} from 'assets/js/constants.js';
 import {useUserStore} from 'store/user.js';
 import getRandomSquare from 'assets/js/getRandomSquare.js';
 
@@ -15,18 +10,22 @@ const userStore = useUserStore();
 let stats;
 
 // difficulty modifiers
-const showLegalMoves = computed(() => userStore.selectedDifficulty <= EASY);
+const showLegalMoves = computed(() => userStore.selectedDifficulty === GOSH);
 const disableLegalMoves = computed(() => {
-    if (userStore.selectedDifficulty === DAMN) {
+    if (userStore.selectedDifficulty === DANG) {
         return 1;
     }
 
-    if (userStore.selectedDifficulty === FUCK) {
+    if (userStore.selectedDifficulty === DARN) {
         return 2;
     }
 
-    if (userStore.selectedDifficulty === EVIL) {
+    if (userStore.selectedDifficulty === HECK) {
         return 3;
+    }
+
+    if (userStore.selectedDifficulty === FRICK) {
+        return 4;
     }
 
     return 0;
@@ -94,31 +93,29 @@ const handleInvalidMove = () => {
 
 <template>
     <div>
-        <GameDifficultyToggle
-            easy
-            dang
-            damn
-            fuck
-            evil
-        />
+        <GameDifficultyToggle gosh shucks dang darn heck frick />
 
-        <GameDifficultyDescription easy>
+        <GameDifficultyDescription gosh>
             Show legal moves
         </GameDifficultyDescription>
 
-        <GameDifficultyDescription dang damn fuck evil>
+        <GameDifficultyDescription shucks dang darn heck frick>
             Hide legal moves
         </GameDifficultyDescription>
 
-        <GameDifficultyDescription damn fuck evil>
+        <GameDifficultyDescription dang darn heck frick>
             Disable one legal move
         </GameDifficultyDescription>
 
-        <GameDifficultyDescription fuck evil>
+        <GameDifficultyDescription darn heck frick>
             Disable one more legal move
         </GameDifficultyDescription>
 
-        <GameDifficultyDescription evil>
+        <GameDifficultyDescription heck frick>
+            Disable one more legal move
+        </GameDifficultyDescription>
+
+        <GameDifficultyDescription frick>
             Disable one more legal move
         </GameDifficultyDescription>
     </div>

@@ -53,6 +53,7 @@ module.exports = {
         'no-plusplus': ['error', {allowForLoopAfterthoughts: true}],
         'no-underscore-dangle': 0,
         'object-curly-spacing': [2, 'never'],
+        'object-curly-newline': ['error', {ImportDeclaration: {minProperties: 7, multiline: true}}],
         'prefer-destructuring': 0,
         'prettier/prettier': 0,
         'quote-props': ['error', 'consistent-as-needed'],
@@ -60,7 +61,7 @@ module.exports = {
         'semi': ['error', 'always'],
         'vue/html-indent': ['error', 4],
         'vue/singleline-html-element-content-newline': 0,
-        'vue/max-attributes-per-line': ['error', {singleline: 4}],
+        'vue/max-attributes-per-line': ['error', {singleline: 6}],
         'vue/no-multiple-template-root': 0,
         'vue/multi-word-component-names': 0,
         'vue/html-self-closing': ['error', {

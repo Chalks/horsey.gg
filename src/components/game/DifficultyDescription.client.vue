@@ -1,35 +1,32 @@
 <script setup>
-import {
-    EASY,
-    DANG,
-    DAMN,
-    FUCK,
-    EVIL,
-} from 'assets/js/constants.js';
+import {GOSH, SHUCKS, DANG, DARN, HECK, FRICK} from 'assets/js/constants.js';
 
 import {useUserStore} from 'store/user.js';
 
 const props = defineProps({
-    easy: {type: Boolean, default: false},
+    gosh: {type: Boolean, default: false},
+    shucks: {type: Boolean, default: false},
     dang: {type: Boolean, default: false},
-    damn: {type: Boolean, default: false},
-    fuck: {type: Boolean, default: false},
-    evil: {type: Boolean, default: false},
+    darn: {type: Boolean, default: false},
+    heck: {type: Boolean, default: false},
+    frick: {type: Boolean, default: false},
 });
 
 const userStore = useUserStore();
 
-const isEasy = computed(() => props.easy && userStore.selectedDifficulty === EASY);
+const isGosh = computed(() => props.gosh && userStore.selectedDifficulty === GOSH);
+const isShucks = computed(() => props.shucks && userStore.selectedDifficulty === SHUCKS);
 const isDang = computed(() => props.dang && userStore.selectedDifficulty === DANG);
-const isDamn = computed(() => props.damn && userStore.selectedDifficulty === DAMN);
-const isFuck = computed(() => props.fuck && userStore.selectedDifficulty === FUCK);
-const isEvil = computed(() => props.evil && userStore.selectedDifficulty === EVIL);
+const isDarn = computed(() => props.darn && userStore.selectedDifficulty === DARN);
+const isHeck = computed(() => props.heck && userStore.selectedDifficulty === HECK);
+const isFrick = computed(() => props.frick && userStore.selectedDifficulty === FRICK);
 
-const show = computed(() => isEasy.value
+const show = computed(() => isGosh.value
+    || isShucks.value
     || isDang.value
-    || isDamn.value
-    || isFuck.value
-    || isEvil.value);
+    || isDarn.value
+    || isHeck.value
+    || isFrick.value);
 </script>
 
 <template>
@@ -37,11 +34,12 @@ const show = computed(() => isEasy.value
         v-if="show"
         class="text-xs font-bold text-gray-700 px-1 pt-1 last:pb-1"
         :class="{
-            'bg-easy': isEasy,
+            'bg-gosh': isGosh,
+            'bg-shucks': isShucks,
             'bg-dang': isDang,
-            'bg-damn': isDamn,
-            'bg-fuck': isFuck,
-            'bg-evil': isEvil,
+            'bg-darn': isDarn,
+            'bg-heck': isHeck,
+            'bg-frick': isFrick,
         }"
     >
         <slot />

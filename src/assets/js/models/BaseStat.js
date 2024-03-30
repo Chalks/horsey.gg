@@ -1,4 +1,4 @@
-import {EASY} from 'assets/js/constants.js';
+import {GOSH} from 'assets/js/constants.js';
 import getKnightDistance from '../getKnightDistance.js';
 
 export default class BaseStat {
@@ -25,7 +25,7 @@ export default class BaseStat {
         invalidMoves,
         ms,
         date,
-        difficulty = EASY,
+        difficulty = GOSH,
     }) {
         if (start === undefined
             || end === undefined

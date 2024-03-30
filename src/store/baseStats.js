@@ -1,6 +1,6 @@
 import {defineStore} from 'pinia';
 import {useUserStore} from 'store/user.js';
-import {EASY} from 'assets/js/constants.js';
+import {GOSH} from 'assets/js/constants.js';
 
 // const ROLLING = 100;
 
@@ -8,7 +8,7 @@ import {EASY} from 'assets/js/constants.js';
 export const useBaseStatsStore = defineStore('baseStatsStore', () => {
     const userStore = useUserStore();
 
-    const difficulty = computed(() => userStore.saveFile?.selectedDifficulty ?? EASY);
+    const difficulty = computed(() => userStore.saveFile?.selectedDifficulty ?? GOSH);
 
     const games = computed(() => {
         const baseStats = Object.values(userStore.saveFile?.baseStats ?? {});
