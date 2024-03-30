@@ -5,7 +5,7 @@ const userStore = useUserStore();
 </script>
 
 <template>
-    <div class="sticky top-0 text-green-900 shadow bg-white px-4 py-2 z-50">
+    <div class="sticky border-b border-gray-700 top-0 text-green-900 shadow bg-white px-4 py-2 z-50">
         <div class="max-w-prose mx-auto flex items-center gap-4">
             <NuxtLink
                 href="/"

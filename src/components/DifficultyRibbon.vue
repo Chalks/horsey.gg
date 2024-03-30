@@ -21,27 +21,42 @@ const isDarn = computed(() => props.darn && userStore.selectedDifficulty === DAR
 const isHeck = computed(() => props.heck && userStore.selectedDifficulty === HECK);
 const isFrick = computed(() => props.frick && userStore.selectedDifficulty === FRICK);
 
-const show = computed(() => isGosh.value
+const on = computed(() => isGosh.value
     || isShucks.value
     || isDang.value
     || isDarn.value
     || isHeck.value
     || isFrick.value);
+
+const className = computed(() => {
+    if (on.value) {
+        return 'top-0';
+    }
+
+    return '-top-6 hover:translate-y-2';
+});
+
+const emit = defineEmits(['click']);
 </script>
 
 <template>
     <div
-        v-if="show"
-        class="text-xs font-bold text-gray-700 p-1 mb-1 last:mb-0"
-        :class="{
-            'bg-gosh': isGosh,
-            'bg-shucks': isShucks,
-            'bg-dang': isDang,
-            'bg-darn': isDarn,
-            'bg-heck': isHeck,
-            'bg-frick': isFrick,
-        }"
+        class="absolute select-none cursor-pointer transition-all"
+        :class="className"
+        @click="emit('click')"
     >
-        <slot />
+        <div
+            class="border-x border-gray-700 inline-block relative w-auto text-center overflow-hidden w-6 h-12"
+            :class="{
+                'bg-gosh': gosh,
+                'bg-shucks': shucks,
+                'bg-dang': dang,
+                'bg-darn': darn,
+                'bg-heck': heck,
+                'bg-frick': frick,
+            }"
+        >
+            <div class="absolute border border-gray-700 bg-white w-[1.06066rem] h-[1.06066rem] bottom-0 left-1/2 rotate-45 -translate-x-1/2 translate-y-1/2" />
+        </div>
     </div>
 </template>

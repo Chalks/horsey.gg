@@ -93,8 +93,6 @@ const handleInvalidMove = () => {
 
 <template>
     <div>
-        <GameDifficultyToggle gosh shucks dang darn heck frick />
-
         <GameDifficultyDescription gosh>
             Show legal moves
         </GameDifficultyDescription>
@@ -125,7 +123,7 @@ const handleInvalidMove = () => {
         :show-legal-moves="showLegalMoves"
         :disable-legal-moves="disableLegalMoves"
         :goal-squares="goalSquares"
-        class="mt-2"
+        class="mt-1"
         @start="handleStart"
         @move="handleMove"
         @invalid-move="handleInvalidMove"
