@@ -92,6 +92,8 @@ const handleInvalidMove = () => {
 </script>
 
 <template>
+    <GameTitleBlock title="Move Machine" class="mb-1" />
+
     <div>
         <GameDifficultyDescription gosh>
             Show legal moves

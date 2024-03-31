@@ -44,59 +44,6 @@ const movementSquares = computed(() => validSquares.value
 
 const playing = ref(false);
 // let friendlyColor = null;
-
-const handleMouseover = (event) => {
-    if (!board) return;
-
-    const square = event.target.getAttribute('data-square');
-    if (!square) return;
-
-    const hoverMarkersOnSquare = board.getMarkers(HOVER_MARKER, square);
-    if (hoverMarkersOnSquare?.length === 0) {
-        board.removeMarkers(HOVER_MARKER);
-        board.addMarker(HOVER_MARKER, square);
-    }
-};
-
-const handleMouseleave = () => {
-    if (!board) return;
-
-    board.removeMarkers(HOVER_MARKER);
-};
-
-const handleMousedown = (event) => {
-    if (!board) return;
-
-    const to = event.target.getAttribute('data-square');
-    if (movementSquares.value.includes(to)) {
-        board.movePiece(horseyLoc.value, to);
-        emit('move', {from: horseyLoc.value, to});
-        horseyLoc.value = to;
-    } else {
-        emit('invalidMove', {from: horseyLoc.value, to});
-    }
-};
-
-const destroyBoard = () => {
-    if (board) {
-        board.destroy();
-        boardEl.value.replaceChildren();
-    }
-};
-
-const createBoard = () => {
-    board = new Chessboard(boardEl.value, {
-        assetsUrl: '/chess/',
-        extensions: [
-            {class: Markers},
-        ],
-    });
-
-    board.context.addEventListener('mousedown', handleMousedown);
-    board.context.addEventListener('mouseover', handleMouseover);
-    board.context.addEventListener('mouseleave', handleMouseleave);
-};
-
 const createHorsey = () => {
     if (!board) return;
 
@@ -143,10 +90,64 @@ const drawDisabledMoves = () => {
     });
 };
 
-watch(horseyLoc, () => {
-    drawLegalMoves();
-    drawDisabledMoves();
-});
+const handleMouseover = (event) => {
+    if (!board) return;
+
+    const square = event.target.getAttribute('data-square');
+    if (!square) return;
+
+    const hoverMarkersOnSquare = board.getMarkers(HOVER_MARKER, square);
+    if (hoverMarkersOnSquare?.length === 0) {
+        board.removeMarkers(HOVER_MARKER);
+        board.addMarker(HOVER_MARKER, square);
+    }
+};
+
+const handleMouseleave = () => {
+    if (!board) return;
+
+    board.removeMarkers(HOVER_MARKER);
+};
+
+const handleMousedown = (event) => {
+    if (!board) return;
+
+    const to = event.target.getAttribute('data-square');
+    if (movementSquares.value.includes(to)) {
+        const from = horseyLoc.value;
+        board.movePiece(from, to);
+        horseyLoc.value = to;
+        drawLegalMoves();
+        drawDisabledMoves();
+
+        emit('move', {from, to});
+    } else {
+        emit('invalidMove', {from: horseyLoc.value, to});
+    }
+};
+
+const destroyBoard = () => {
+    if (board) {
+        horseyLoc.value = null;
+        board.removeMarkers();
+        board.destroy();
+        boardEl.value.replaceChildren();
+    }
+};
+
+const createBoard = () => {
+    board = new Chessboard(boardEl.value, {
+        assetsUrl: '/chess/',
+        extensions: [
+            {class: Markers},
+        ],
+    });
+
+    board.context.addEventListener('mousedown', handleMousedown);
+    board.context.addEventListener('mouseover', handleMouseover);
+    board.context.addEventListener('mouseleave', handleMouseleave);
+};
+
 
 onMounted(() => {
     createBoard();
@@ -168,10 +169,10 @@ const ready = () => {
 };
 
 const stop = () => {
-    board?.removeMarkers();
+    playing.value = false;
+    horseyLoc.value = null;
     destroyBoard();
     createBoard();
-    playing.value = false;
 };
 
 defineExpose({

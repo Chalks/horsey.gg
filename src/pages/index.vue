@@ -13,13 +13,10 @@ const resetStats = () => {
 </script>
 
 <template>
-    <h1>Base Horsey</h1>
     <GameBaseHorsey />
 
-    <div class="xl:fixed xl:right-0 xl:top-0 xl:bottom-0 xl:w-full xl:max-w-side xl:overflow-auto z-50">
-        <div class="xl:mx-4 xl:mt-[10.5rem]">
-            <StatsDisplay />
-        </div>
+    <div class="mt-4">
+        <StatsDisplay />
     </div>
 
     <p>
