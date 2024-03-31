@@ -14,6 +14,13 @@ const userStore = useUserStore();
                 horsey.gg
             </NuxtLink>
 
+            <NuxtLink
+                href="/achievements"
+                class="hidden flex items-center gap-2 hover:text-horse transition-colors"
+            >
+                achievements
+            </NuxtLink>
+
             <div class="grow" />
 
             <NuxtLink

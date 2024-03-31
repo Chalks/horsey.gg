@@ -10,6 +10,8 @@ export const useBaseStatsStore = defineStore('baseStatsStore', () => {
 
     const difficulty = computed(() => userStore.saveFile?.selectedDifficulty ?? GOSH);
 
+    const rawGames = computed(() => Object.values(userStore.saveFile?.baseStats ?? {}));
+
     const games = computed(() => {
         const baseStats = Object.values(userStore.saveFile?.baseStats ?? {});
         return baseStats.filter(({difficulty: gameDifficulty}) => gameDifficulty === difficulty.value);
@@ -99,6 +101,7 @@ export const useBaseStatsStore = defineStore('baseStatsStore', () => {
     });
 
     return {
+        rawGames,
         baseStats,
         difficulty,
     };
