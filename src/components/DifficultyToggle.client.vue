@@ -21,7 +21,7 @@ const setFrick = () => { userStore.setDifficulty(FRICK); };
         <DifficultyRibbon frick @click="setFrick" />
 
         <div
-            class="flex flex-col justify-end items-center grow bg-gradient-to-t ml-1"
+            class="flex flex-col justify-end items-center grow bg-gradient-to-t ml-1 pb-1"
             :class="{
                 'from-gosh': userStore.isGosh,
                 'from-shucks': userStore.isShucks,
@@ -41,7 +41,7 @@ const setFrick = () => { userStore.setDifficulty(FRICK); };
             <div
                 v-for="(char, index) in userStore.difficultyName"
                 :key="`letter-${char}-${index}`"
-                class="text-2xl mix-blend-color-dodge"
+                class="text-sm md:text-lg lg:text-xl xl:text-2xl mix-blend-color-dodge"
             >
                 {{ char }}
             </div>
