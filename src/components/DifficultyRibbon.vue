@@ -46,7 +46,7 @@ const emit = defineEmits(['click']);
         @click="emit('click')"
     >
         <div
-            class="border-y border-gray-700 inline-block relative w-auto text-center overflow-hidden w-12 h-4"
+            class="border-y border-gray-700 inline-block relative text-center overflow-hidden w-12 h-4"
             :class="{
                 'bg-gosh': gosh,
                 'bg-shucks': shucks,
