@@ -21,30 +21,13 @@ const setHeck = () => { userStore.setDifficulty(HECK); };
 const setFrick = () => { userStore.setDifficulty(FRICK); };
 </script>
 <template>
-    <div class="relative max-w-prose mx-auto w-full flex gap-12">
-        <div>
-            <DifficultyRibbon gosh @click="setGosh" />
-        </div>
-
-        <div>
-            <DifficultyRibbon shucks @click="setShucks" />
-        </div>
-
-        <div>
-            <DifficultyRibbon dang @click="setDang" />
-        </div>
-
-        <div>
-            <DifficultyRibbon darn @click="setDarn" />
-        </div>
-
-        <div>
-            <DifficultyRibbon heck @click="setHeck" />
-        </div>
-
-        <div>
-            <DifficultyRibbon frick @click="setFrick" />
-        </div>
+    <div class="relative max-w-prose mx-auto w-full flex flex-col gap-1">
+        <DifficultyRibbon gosh @click="setGosh" />
+        <DifficultyRibbon shucks @click="setShucks" />
+        <DifficultyRibbon dang @click="setDang" />
+        <DifficultyRibbon darn @click="setDarn" />
+        <DifficultyRibbon heck @click="setHeck" />
+        <DifficultyRibbon frick @click="setFrick" />
     </div>
 
     <div class="relative max-w-prose mx-auto w-full mt-20" />

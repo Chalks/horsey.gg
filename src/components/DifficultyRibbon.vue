@@ -30,10 +30,10 @@ const on = computed(() => isGosh.value
 
 const className = computed(() => {
     if (on.value) {
-        return 'top-0';
+        return 'translate-x-[2rem]';
     }
 
-    return '-top-6 hover:translate-y-2';
+    return 'translate-x-[1rem] hover:translate-x-[1.5rem]';
 });
 
 const emit = defineEmits(['click']);
@@ -41,12 +41,12 @@ const emit = defineEmits(['click']);
 
 <template>
     <div
-        class="absolute select-none cursor-pointer transition-all"
+        class="select-none cursor-pointer transition-all"
         :class="className"
         @click="emit('click')"
     >
         <div
-            class="border-x border-gray-700 inline-block relative w-auto text-center overflow-hidden w-6 h-12"
+            class="border-y border-gray-700 inline-block relative w-auto text-center overflow-hidden w-12 h-4"
             :class="{
                 'bg-gosh': gosh,
                 'bg-shucks': shucks,
@@ -56,7 +56,7 @@ const emit = defineEmits(['click']);
                 'bg-frick': frick,
             }"
         >
-            <div class="absolute border border-gray-700 bg-white w-[1.06066rem] h-[1.06066rem] bottom-0 left-1/2 rotate-45 -translate-x-1/2 translate-y-1/2" />
+            <div class="absolute border border-gray-700 bg-white w-[0.707106rem] h-[0.707106rem] top-1/2 right-0 rotate-45 translate-x-1/2 -translate-y-1/2" />
         </div>
     </div>
 </template>

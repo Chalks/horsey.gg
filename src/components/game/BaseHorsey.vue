@@ -94,7 +94,24 @@ const handleInvalidMove = () => {
 <template>
     <GameTitleBlock title="Move Machine" class="mb-1" />
 
-    <div>
+    <div class="relative mr-8">
+        <ChessBoard
+            ref="board"
+            :show-legal-moves="showLegalMoves"
+            :disable-legal-moves="disableLegalMoves"
+            :goal-squares="goalSquares"
+            class="z-20 border border-gray-700"
+            @start="handleStart"
+            @move="handleMove"
+            @invalid-move="handleInvalidMove"
+        />
+
+        <div class="absolute top-0 right-0 z-10">
+            <DifficultyToggle />
+        </div>
+    </div>
+
+    <div class="mt-1">
         <GameDifficultyDescription gosh>
             Show legal moves
         </GameDifficultyDescription>
@@ -119,15 +136,4 @@ const handleInvalidMove = () => {
             Disable one more legal move
         </GameDifficultyDescription>
     </div>
-
-    <ChessBoard
-        ref="board"
-        :show-legal-moves="showLegalMoves"
-        :disable-legal-moves="disableLegalMoves"
-        :goal-squares="goalSquares"
-        class="mt-1"
-        @start="handleStart"
-        @move="handleMove"
-        @invalid-move="handleInvalidMove"
-    />
 </template>
