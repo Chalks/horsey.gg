@@ -94,22 +94,23 @@ const handleInvalidMove = () => {
 <template>
     <GameTitleBlock title="Move Machine" class="mb-1" />
 
-    <div class="relative mr-8">
+    <div class="flex">
         <ChessBoard
             ref="board"
             :show-legal-moves="showLegalMoves"
             :disable-legal-moves="disableLegalMoves"
             :goal-squares="goalSquares"
-            class="z-20 border border-gray-700"
+            class="flex-grow"
             @start="handleStart"
             @move="handleMove"
             @invalid-move="handleInvalidMove"
         />
 
-        <div class="absolute top-0 right-0 z-10">
+        <div class="w-8">
             <DifficultyToggle />
         </div>
     </div>
+
 
     <div class="mt-1">
         <GameDifficultyDescription gosh>

@@ -21,12 +21,16 @@ module.exports = {
         extend: {
             colors: {
                 horse: '#5D9945',
-                gosh: colors.green['100'],
-                shucks: colors.green['300'],
-                dang: colors.yellow['100'],
-                darn: colors.yellow['300'],
-                heck: colors.red['100'],
-                frick: colors.red['300'],
+                gosh: colors.green['200'],
+                shucks: colors.green['400'],
+                dang: colors.yellow['200'],
+                darn: colors.yellow['400'],
+                heck: colors.red['200'],
+                frick: colors.red['400'],
+            },
+
+            gradientColorStopPositions: {
+                33: '33%',
             },
         },
     },

@@ -1,6 +1,4 @@
 <script setup>
-import {GOSH, SHUCKS, DANG, DARN, HECK, FRICK} from 'assets/js/constants.js';
-
 import {useUserStore} from 'store/user.js';
 
 const props = defineProps({
@@ -14,12 +12,12 @@ const props = defineProps({
 
 const userStore = useUserStore();
 
-const isGosh = computed(() => props.gosh && userStore.selectedDifficulty === GOSH);
-const isShucks = computed(() => props.shucks && userStore.selectedDifficulty === SHUCKS);
-const isDang = computed(() => props.dang && userStore.selectedDifficulty === DANG);
-const isDarn = computed(() => props.darn && userStore.selectedDifficulty === DARN);
-const isHeck = computed(() => props.heck && userStore.selectedDifficulty === HECK);
-const isFrick = computed(() => props.frick && userStore.selectedDifficulty === FRICK);
+const isGosh = computed(() => props.gosh && userStore.isGosh);
+const isShucks = computed(() => props.shucks && userStore.isShucks);
+const isDang = computed(() => props.dang && userStore.isDang);
+const isDarn = computed(() => props.darn && userStore.isDarn);
+const isHeck = computed(() => props.heck && userStore.isHeck);
+const isFrick = computed(() => props.frick && userStore.isFrick);
 
 const on = computed(() => isGosh.value
     || isShucks.value
@@ -30,10 +28,10 @@ const on = computed(() => isGosh.value
 
 const className = computed(() => {
     if (on.value) {
-        return 'translate-x-[2rem]';
+        return '-translate-x-[0rem]';
     }
 
-    return 'translate-x-[1rem] hover:translate-x-[1.5rem]';
+    return '-translate-x-[1rem] hover:-translate-x-[0.5rem]';
 });
 
 const emit = defineEmits(['click']);
@@ -46,7 +44,7 @@ const emit = defineEmits(['click']);
         @click="emit('click')"
     >
         <div
-            class="border-y border-gray-700 inline-block relative text-center overflow-hidden w-12 h-4"
+            class="border-y border-gray-700 inline-block relative text-center overflow-hidden w-8 h-4"
             :class="{
                 'bg-gosh': gosh,
                 'bg-shucks': shucks,
