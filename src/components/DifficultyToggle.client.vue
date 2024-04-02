@@ -4,6 +4,15 @@ import {GOSH, SHUCKS, DANG, DARN, HECK, FRICK} from 'assets/js/constants.js';
 
 const userStore = useUserStore();
 
+defineProps({
+    gosh: {type: Boolean, default: false},
+    shucks: {type: Boolean, default: false},
+    dang: {type: Boolean, default: false},
+    darn: {type: Boolean, default: false},
+    heck: {type: Boolean, default: false},
+    frick: {type: Boolean, default: false},
+});
+
 const setGosh = () => { userStore.setDifficulty(GOSH); };
 const setShucks = () => { userStore.setDifficulty(SHUCKS); };
 const setDang = () => { userStore.setDifficulty(DANG); };
@@ -13,12 +22,12 @@ const setFrick = () => { userStore.setDifficulty(FRICK); };
 </script>
 <template>
     <div class="relative flex flex-col gap-1 overflow-clip w-8 h-full">
-        <DifficultyRibbon gosh @click="setGosh" />
-        <DifficultyRibbon shucks @click="setShucks" />
-        <DifficultyRibbon dang @click="setDang" />
-        <DifficultyRibbon darn @click="setDarn" />
-        <DifficultyRibbon heck @click="setHeck" />
-        <DifficultyRibbon frick @click="setFrick" />
+        <DifficultyRibbon v-if="gosh" gosh @click="setGosh" />
+        <DifficultyRibbon v-if="shucks" shucks @click="setShucks" />
+        <DifficultyRibbon v-if="dang" dang @click="setDang" />
+        <DifficultyRibbon v-if="darn" darn @click="setDarn" />
+        <DifficultyRibbon v-if="heck" heck @click="setHeck" />
+        <DifficultyRibbon v-if="frick" frick @click="setFrick" />
 
         <div
             class="flex flex-col justify-end items-center grow bg-gradient-to-t ml-1 pb-1"

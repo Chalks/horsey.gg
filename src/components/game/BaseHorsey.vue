@@ -2,12 +2,22 @@
 import BaseStat from 'assets/js/models/BaseStat.js';
 import {GOSH, DANG, DARN, HECK, FRICK} from 'assets/js/constants.js';
 import {useUserStore} from 'store/user.js';
+import {useAchievementsStore} from 'store/achievements.js';
 import getRandomSquare from 'assets/js/getRandomSquare.js';
 
 const board = ref(null);
 const goalSquares = ref([]);
 const userStore = useUserStore();
+const achievementsStore = useAchievementsStore();
 let stats;
+
+// achievement unlocks
+const canGosh = true;
+const canShucks = true;
+const canDang = computed(() => achievementsStore.mmWinShucks10);
+const canDarn = computed(() => achievementsStore.mmWinDang10);
+const canHeck = computed(() => achievementsStore.mmWinDarn10);
+const canFrick = computed(() => achievementsStore.mmWinHeck10);
 
 // difficulty modifiers
 const showLegalMoves = computed(() => userStore.selectedDifficulty === GOSH);
@@ -106,7 +116,14 @@ const handleInvalidMove = () => {
             @invalid-move="handleInvalidMove"
         />
         <div class="absolute top-0 right-0 bottom-0">
-            <DifficultyToggle />
+            <DifficultyToggle
+                :gosh="canGosh"
+                :shucks="canShucks"
+                :dang="canDang"
+                :darn="canDarn"
+                :heck="canHeck"
+                :frick="canFrick"
+            />
         </div>
     </div>
 

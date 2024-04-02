@@ -1,6 +1,13 @@
 import {defineStore} from 'pinia';
 import {useUserStore} from 'store/user.js';
-import {GOSH} from 'assets/js/constants.js';
+import {
+    GOSH,
+    SHUCKS,
+    DANG,
+    DARN,
+    HECK,
+    FRICK,
+} from 'assets/js/constants.js';
 
 // const ROLLING = 100;
 
@@ -8,13 +15,32 @@ import {GOSH} from 'assets/js/constants.js';
 export const useBaseStatsStore = defineStore('baseStatsStore', () => {
     const userStore = useUserStore();
 
-    const difficulty = computed(() => userStore.saveFile?.selectedDifficulty ?? GOSH);
+    const currentDifficulty = computed(() => userStore.saveFile?.selectedDifficulty ?? GOSH);
 
-    const rawGames = computed(() => Object.values(userStore.saveFile?.baseStats ?? {}));
+    const rawGames = computed(() => Object.values(userStore.saveFile?.baseStats ?? []));
+
+    const goshGames = computed(() => rawGames.value
+        .filter(({difficulty}) => difficulty === GOSH));
+
+    const shucksGames = computed(() => rawGames.value
+        .filter(({difficulty}) => difficulty === SHUCKS));
+
+    const dangGames = computed(() => rawGames.value
+        .filter(({difficulty}) => difficulty === DANG));
+
+    const darnGames = computed(() => rawGames.value
+        .filter(({difficulty}) => difficulty === DARN));
+
+    const heckGames = computed(() => rawGames.value
+        .filter(({difficulty}) => difficulty === HECK));
+
+    const frickGames = computed(() => rawGames.value
+        .filter(({difficulty}) => difficulty === FRICK));
+
 
     const games = computed(() => {
-        const baseStats = Object.values(userStore.saveFile?.baseStats ?? {});
-        return baseStats.filter(({difficulty: gameDifficulty}) => gameDifficulty === difficulty.value);
+        const baseStats = Object.values(userStore.saveFile?.baseStats ?? []);
+        return baseStats.filter(({difficulty}) => difficulty === currentDifficulty.value);
     });
 
     const allGames = computed(() => games.value.length);
@@ -102,8 +128,13 @@ export const useBaseStatsStore = defineStore('baseStatsStore', () => {
 
     return {
         rawGames,
+        goshGames,
+        shucksGames,
+        dangGames,
+        darnGames,
+        heckGames,
+        frickGames,
         baseStats,
-        difficulty,
     };
 });
 
