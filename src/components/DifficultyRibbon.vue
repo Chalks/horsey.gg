@@ -2,6 +2,7 @@
 import {useUserStore} from 'store/user.js';
 
 const props = defineProps({
+    disabled: {type: Boolean, default: false},
     gosh: {type: Boolean, default: false},
     shucks: {type: Boolean, default: false},
     dang: {type: Boolean, default: false},
@@ -26,22 +27,26 @@ const on = computed(() => isGosh.value
     || isHeck.value
     || isFrick.value);
 
-const className = computed(() => {
-    if (on.value) {
-        return '-translate-x-[0rem]';
-    }
-
-    return '-translate-x-[1rem] hover:-translate-x-[0.5rem]';
-});
-
 const emit = defineEmits(['click']);
+
+const handleClick = () => {
+    if (!props.disabled) {
+        emit('click');
+    }
+};
 </script>
 
 <template>
     <div
         class="select-none cursor-pointer transition-all"
-        :class="className"
-        @click="emit('click')"
+        :class="{
+            '-translate-x-[0rem]': on,
+            '-translate-x-[1rem]': !on,
+            'hover:-translate-x-[0.5rem]': !on && !disabled,
+            'cursor-not-allowed': disabled,
+            'opacity-30': disabled,
+        }"
+        @click="handleClick"
     >
         <div
             class="border-y border-gray-700 inline-block relative text-center overflow-hidden w-8 h-4"

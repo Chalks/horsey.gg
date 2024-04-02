@@ -22,12 +22,12 @@ const setFrick = () => { userStore.setDifficulty(FRICK); };
 </script>
 <template>
     <div class="relative flex flex-col gap-1 overflow-clip w-8 h-full">
-        <DifficultyRibbon v-if="gosh" gosh @click="setGosh" />
-        <DifficultyRibbon v-if="shucks" shucks @click="setShucks" />
-        <DifficultyRibbon v-if="dang" dang @click="setDang" />
-        <DifficultyRibbon v-if="darn" darn @click="setDarn" />
-        <DifficultyRibbon v-if="heck" heck @click="setHeck" />
-        <DifficultyRibbon v-if="frick" frick @click="setFrick" />
+        <DifficultyRibbon :disabled="!gosh" gosh @click="setGosh" />
+        <DifficultyRibbon :disabled="!shucks" shucks @click="setShucks" />
+        <DifficultyRibbon :disabled="!dang" dang @click="setDang" />
+        <DifficultyRibbon :disabled="!darn" darn @click="setDarn" />
+        <DifficultyRibbon :disabled="!heck" heck @click="setHeck" />
+        <DifficultyRibbon :disabled="!frick" frick @click="setFrick" />
 
         <div
             class="flex flex-col justify-end items-center grow bg-gradient-to-t ml-1 pb-1"
