@@ -92,7 +92,7 @@ const handleInvalidMove = () => {
 </script>
 
 <template>
-    <GameTitleBlock title="Move Machine" class="mb-1" />
+    <GameTitleBlock title="Move Machine" class="mb-4" />
 
     <div class="relative pr-8">
         <ChessBoard
