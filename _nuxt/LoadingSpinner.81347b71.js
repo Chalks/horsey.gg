@@ -1,0 +1,1 @@
+import{I as e}from"./iconify.ad266292.js";import{_ as o}from"./_plugin-vue_export-helper.c27b6911.js";import{o as _,c as n,u as c}from"./entry.ecd2a2cf.js";const t={__name:"LoadingSpinner",setup(r){return(s,a)=>(_(),n(c(e),{icon:"mingcute:toy-horse-line",class:"rock"}))}},u=o(t,[["__scopeId","data-v-2ece8d85"]]);export{u as _};
