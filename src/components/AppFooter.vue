@@ -4,7 +4,7 @@ const year = new Date().getUTCFullYear();
 
 <template>
     <div class="max-w-prose mx-auto flex justify-end items-end w-full px-4 md:px-0">
-        <HorsefaceIcon large class="text-horse" />
+        <HorsefaceIcon large />
     </div>
     <div class="bg-gradient-to-r from-gray-700 via-gray-900 to-gray-700 text-gray-100 px-4 py-4 md:py-12">
         <div class="max-w-prose mx-auto flex justify-between items-center">

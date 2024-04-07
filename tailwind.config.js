@@ -8,6 +8,7 @@ module.exports = {
         './src/pages/**/*.vue',
         // './plugins/**/*.{js,ts}',
         // './nuxt.config.{js,ts}',
+        './src/assets/js/*.js',
         './src/app.vue',
     ],
 

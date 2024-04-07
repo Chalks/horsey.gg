@@ -14,10 +14,10 @@ let stats;
 // achievement unlocks
 const canGosh = true;
 const canShucks = true;
-const canDang = computed(() => achievementsStore.mmWinShucks10);
-const canDarn = computed(() => achievementsStore.mmWinDang10);
-const canHeck = computed(() => achievementsStore.mmWinDarn10);
-const canFrick = computed(() => achievementsStore.mmWinHeck10);
+const canDang = computed(() => achievementsStore.unlocked || achievementsStore.mmWinShucks10);
+const canDarn = computed(() => achievementsStore.unlocked || achievementsStore.mmWinDang10);
+const canHeck = computed(() => achievementsStore.unlocked || achievementsStore.mmWinDarn10);
+const canFrick = computed(() => achievementsStore.unlocked || achievementsStore.mmWinHeck10);
 
 // difficulty modifiers
 const showLegalMoves = computed(() => userStore.selectedDifficulty === GOSH);

@@ -7,6 +7,9 @@ export const useAchievementsStore = defineStore('achievementsStore', () => {
     // const userStore = useUserStore();
     const baseStatsStore = useBaseStatsStore();
 
+    // Global unlock
+    const unlocked = ref(false);
+
     // MOVE MACHINE achievements
     const mmWinGosh10 = computed(() => baseStatsStore.goshGames.length >= 10);
     const mmWinGosh100 = computed(() => baseStatsStore.goshGames.length >= 100);
@@ -21,6 +24,10 @@ export const useAchievementsStore = defineStore('achievementsStore', () => {
     const mmWinFrick10 = computed(() => baseStatsStore.frickGames.length >= 10);
     const mmWinFrick100 = computed(() => baseStatsStore.frickGames.length >= 100);
 
+    const toggleGlobalLock = () => {
+        unlocked.value = !unlocked.value;
+    };
+
     return {
         mmWinGosh10,
         mmWinGosh100,
@@ -34,6 +41,8 @@ export const useAchievementsStore = defineStore('achievementsStore', () => {
         mmWinHeck100,
         mmWinFrick10,
         mmWinFrick100,
+        unlocked,
+        toggleGlobalLock,
     };
 });
 
