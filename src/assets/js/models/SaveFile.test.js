@@ -34,7 +34,9 @@ describe('SaveFile', () => {
         const date2 = date - 10000;
 
         validDeserialized = new SaveFile({
-            selectedDifficulty: SHUCKS,
+            selectedDifficulties: {
+                moveMachine: SHUCKS,
+            },
             moveMachineStats: {
                 [date]: new MoveMachineStat({
                     start: 'a1',
@@ -58,7 +60,9 @@ describe('SaveFile', () => {
         });
 
         validSerialized = {
-            selectedDifficulty: SHUCKS,
+            selectedDifficulties: {
+                moveMachine: SHUCKS,
+            },
             moveMachineStats: {
                 [validDeserialized.moveMachineStats[date].date]: [
                     validDeserialized.moveMachineStats[date].start,

@@ -3,37 +3,38 @@ import {GOSH} from 'assets/js/constants.js';
 import MoveMachineStat from './MoveMachineStat.js';
 
 export default class SaveFile {
-    selectedDifficulty;
+    selectedDifficulties;
     moveMachineStats;
 
     constructor({
-        selectedDifficulty = GOSH,
+        selectedDifficulties = {},
         moveMachineStats = {},
     } = {}) {
-        this.selectedDifficulty = selectedDifficulty;
+        this.selectedDifficulties = {
+            moveMachine: selectedDifficulties.moveMachine ?? GOSH,
+        };
         this.moveMachineStats = moveMachineStats;
     }
 
     reset() {
-        this.selectedDifficulty = GOSH;
+        this.selectedDifficulties = {
+            moveMachine: GOSH,
+        };
         this.moveMachineStats = {};
 
         sjwtSave({
             overwrite: true,
             privateData: {
                 saveFile: {
-                    selectedDifficulty: GOSH,
+                    selectedDifficulties: this.selectedDifficulties,
                     moveMachineStats: this.moveMachineStats,
-                    // this.somethingStats,
-                    // this.fooStats,
-                    // etc
                 },
             },
         });
     }
 
     setDifficulty(difficulty) {
-        this.selectedDifficulty = difficulty;
+        this.selectedDifficulties.moveMachine = difficulty;
     }
 
     addMoveMachineStat(moveMachineStat) {
@@ -61,7 +62,9 @@ export default class SaveFile {
 
     serialize() {
         return {
-            selectedDifficulty: this.selectedDifficulty,
+            selectedDifficulties: {
+                moveMachine: this.selectedDifficulties?.moveMachine ?? GOSH,
+            },
             moveMachineStats: Object.keys(this.moveMachineStats)
                 .reduce((acc, date) => ({
                     ...acc,
@@ -71,11 +74,13 @@ export default class SaveFile {
     }
 
     static deserialize({
-        selectedDifficulty = GOSH,
+        selectedDifficulties = {},
         moveMachineStats = {},
     } = {}) {
         return new SaveFile({
-            selectedDifficulty,
+            selectedDifficulties: {
+                moveMachine: selectedDifficulties.moveMachine ?? GOSH,
+            },
             moveMachineStats: Object.keys(moveMachineStats)
                 .reduce((acc, date) => {
                     acc[date] = MoveMachineStat.deserialize({

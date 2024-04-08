@@ -8,7 +8,7 @@ export const useUserStore = defineStore('userStore', () => {
     const saveFile = ref(null);
 
     const isAuthenticated = computed(() => user.value != null);
-    const selectedDifficulty = computed(() => saveFile.value?.selectedDifficulty ?? GOSH);
+    const selectedDifficulty = computed(() => saveFile.value?.selectedDifficulties?.moveMachine ?? GOSH);
 
     const isGosh = computed(() => selectedDifficulty.value === GOSH);
     const isShucks = computed(() => selectedDifficulty.value === SHUCKS);

@@ -15,7 +15,8 @@ import {
 export const useMoveMachineStore = defineStore('moveMachineStore', () => {
     const userStore = useUserStore();
 
-    const currentDifficulty = computed(() => userStore.saveFile?.selectedDifficulty ?? GOSH);
+    const currentDifficulty = computed(() => userStore
+        .saveFile?.selectedDifficulties?.moveMachine ?? GOSH);
 
     const rawGames = computed(() => Object.values(userStore.saveFile?.moveMachineStats ?? []));
 
@@ -127,6 +128,7 @@ export const useMoveMachineStore = defineStore('moveMachineStore', () => {
     });
 
     return {
+        currentDifficulty,
         rawGames,
         goshGames,
         shucksGames,
