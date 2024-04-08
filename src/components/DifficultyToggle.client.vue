@@ -5,12 +5,13 @@ import {GOSH, SHUCKS, DANG, DARN, HECK, FRICK} from 'assets/js/constants.js';
 const userStore = useUserStore();
 
 defineProps({
-    gosh: {type: Boolean, default: false},
-    shucks: {type: Boolean, default: false},
-    dang: {type: Boolean, default: false},
-    darn: {type: Boolean, default: false},
-    heck: {type: Boolean, default: false},
-    frick: {type: Boolean, default: false},
+    difficulty: {type: Number, default: GOSH},
+    canGosh: {type: Boolean, default: false},
+    canShucks: {type: Boolean, default: false},
+    canDang: {type: Boolean, default: false},
+    canDarn: {type: Boolean, default: false},
+    canHeck: {type: Boolean, default: false},
+    canFrick: {type: Boolean, default: false},
 });
 
 const setGosh = () => { userStore.setDifficulty(GOSH); };
@@ -22,12 +23,12 @@ const setFrick = () => { userStore.setDifficulty(FRICK); };
 </script>
 <template>
     <div class="relative flex flex-col gap-1.5 overflow-clip w-8 h-full">
-        <DifficultyRibbon :disabled="!gosh" gosh @click="setGosh" />
-        <DifficultyRibbon :disabled="!shucks" shucks @click="setShucks" />
-        <DifficultyRibbon :disabled="!dang" dang @click="setDang" />
-        <DifficultyRibbon :disabled="!darn" darn @click="setDarn" />
-        <DifficultyRibbon :disabled="!heck" heck @click="setHeck" />
-        <DifficultyRibbon :disabled="!frick" frick @click="setFrick" />
+        <DifficultyRibbon :on="difficulty === GOSH" :disabled="!canGosh" gosh @click="setGosh" />
+        <DifficultyRibbon :on="difficulty === SHUCKS" :disabled="!canShucks" shucks @click="setShucks" />
+        <DifficultyRibbon :on="difficulty === DANG" :disabled="!canDang" dang @click="setDang" />
+        <DifficultyRibbon :on="difficulty === DARN" :disabled="!canDarn" darn @click="setDarn" />
+        <DifficultyRibbon :on="difficulty === HECK" :disabled="!canHeck" heck @click="setHeck" />
+        <DifficultyRibbon :on="difficulty === FRICK" :disabled="!canFrick" frick @click="setFrick" />
 
         <div
             class="flex flex-col justify-end items-center grow bg-gradient-to-t ml-1 pb-1"

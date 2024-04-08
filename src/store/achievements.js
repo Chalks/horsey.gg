@@ -1,30 +1,30 @@
 import {defineStore} from 'pinia';
 // import {useUserStore} from 'store/user.js';
-import {useBaseStatsStore} from 'store/baseStats.js';
+import {useMoveMachineStore} from 'store/moveMachine.js';
 
-const HUNDO = 11;
+const HUNDO = 100;
 
 // eslint-disable-next-line import/prefer-default-export
 export const useAchievementsStore = defineStore('achievementsStore', () => {
     // const userStore = useUserStore();
-    const baseStatsStore = useBaseStatsStore();
+    const moveMachineStore = useMoveMachineStore();
 
     // Global unlock
     const unlocked = ref(false);
 
     // MOVE MACHINE achievements
-    const mmWinGosh10 = computed(() => baseStatsStore.goshGames.length >= 10);
-    const mmWinGosh100 = computed(() => baseStatsStore.goshGames.length >= HUNDO);
-    const mmWinShucks10 = computed(() => baseStatsStore.shucksGames.length >= 10);
-    const mmWinShucks100 = computed(() => baseStatsStore.Games.length >= HUNDO);
-    const mmWinDang10 = computed(() => baseStatsStore.dangGames.length >= 10);
-    const mmWinDang100 = computed(() => baseStatsStore.dangGames.length >= HUNDO);
-    const mmWinDarn10 = computed(() => baseStatsStore.darnGames.length >= 10);
-    const mmWinDarn100 = computed(() => baseStatsStore.darnGames.length >= HUNDO);
-    const mmWinHeck10 = computed(() => baseStatsStore.heckGames.length >= 10);
-    const mmWinHeck100 = computed(() => baseStatsStore.heckGames.length >= HUNDO);
-    const mmWinFrick10 = computed(() => baseStatsStore.frickGames.length >= 10);
-    const mmWinFrick100 = computed(() => baseStatsStore.frickGames.length >= HUNDO);
+    const mmWinGosh10 = computed(() => moveMachineStore.goshGames.length >= 10);
+    const mmWinGosh100 = computed(() => moveMachineStore.goshGames.length >= HUNDO);
+    const mmWinShucks10 = computed(() => moveMachineStore.shucksGames.length >= 10);
+    const mmWinShucks100 = computed(() => moveMachineStore.Games.length >= HUNDO);
+    const mmWinDang10 = computed(() => moveMachineStore.dangGames.length >= 10);
+    const mmWinDang100 = computed(() => moveMachineStore.dangGames.length >= HUNDO);
+    const mmWinDarn10 = computed(() => moveMachineStore.darnGames.length >= 10);
+    const mmWinDarn100 = computed(() => moveMachineStore.darnGames.length >= HUNDO);
+    const mmWinHeck10 = computed(() => moveMachineStore.heckGames.length >= 10);
+    const mmWinHeck100 = computed(() => moveMachineStore.heckGames.length >= HUNDO);
+    const mmWinFrick10 = computed(() => moveMachineStore.frickGames.length >= 10);
+    const mmWinFrick100 = computed(() => moveMachineStore.frickGames.length >= HUNDO);
 
     const toggleGlobalLock = () => {
         unlocked.value = !unlocked.value;

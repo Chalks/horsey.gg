@@ -1,29 +1,29 @@
 import {save as sjwtSave} from 'sjwt';
 import {GOSH} from 'assets/js/constants.js';
-import BaseStat from './BaseStat.js';
+import MoveMachineStat from './MoveMachineStat.js';
 
 export default class SaveFile {
     selectedDifficulty;
-    baseStats;
+    moveMachineStats;
 
     constructor({
         selectedDifficulty = GOSH,
-        baseStats = {},
+        moveMachineStats = {},
     } = {}) {
         this.selectedDifficulty = selectedDifficulty;
-        this.baseStats = baseStats;
+        this.moveMachineStats = moveMachineStats;
     }
 
-    resetBaseStats() {
+    reset() {
         this.selectedDifficulty = GOSH;
-        this.baseStats = {};
+        this.moveMachineStats = {};
 
         sjwtSave({
             overwrite: true,
             privateData: {
                 saveFile: {
                     selectedDifficulty: GOSH,
-                    baseStats: this.baseStats,
+                    moveMachineStats: this.moveMachineStats,
                     // this.somethingStats,
                     // this.fooStats,
                     // etc
@@ -36,15 +36,15 @@ export default class SaveFile {
         this.selectedDifficulty = difficulty;
     }
 
-    addBaseStat(baseStat) {
-        this.baseStats[baseStat.date] = baseStat;
+    addMoveMachineStat(moveMachineStat) {
+        this.moveMachineStats[moveMachineStat.date] = moveMachineStat;
 
         // save just a single game;
         sjwtSave({
             privateData: {
                 saveFile: {
-                    baseStats: {
-                        ...baseStat.serialize(),
+                    moveMachineStats: {
+                        ...moveMachineStat.serialize(),
                     },
                 },
             },
@@ -62,24 +62,24 @@ export default class SaveFile {
     serialize() {
         return {
             selectedDifficulty: this.selectedDifficulty,
-            baseStats: Object.keys(this.baseStats)
+            moveMachineStats: Object.keys(this.moveMachineStats)
                 .reduce((acc, date) => ({
                     ...acc,
-                    ...this.baseStats[date].serialize(),
+                    ...this.moveMachineStats[date].serialize(),
                 }), {}),
         };
     }
 
     static deserialize({
         selectedDifficulty = GOSH,
-        baseStats = {},
+        moveMachineStats = {},
     } = {}) {
         return new SaveFile({
             selectedDifficulty,
-            baseStats: Object.keys(baseStats)
+            moveMachineStats: Object.keys(moveMachineStats)
                 .reduce((acc, date) => {
-                    acc[date] = BaseStat.deserialize({
-                        [date]: baseStats[date],
+                    acc[date] = MoveMachineStat.deserialize({
+                        [date]: moveMachineStats[date],
                     });
                     return acc;
                 }, {}),

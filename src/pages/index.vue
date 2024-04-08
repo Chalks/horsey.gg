@@ -8,12 +8,12 @@ seo({
 const userStore = useUserStore();
 
 const resetStats = () => {
-    userStore.saveFile.resetBaseStats();
+    userStore.saveFile.reset();
 };
 </script>
 
 <template>
-    <GameBaseHorsey />
+    <GameMoveMachine />
 
     <div class="mt-4">
         <StatsDisplay />
@@ -24,7 +24,6 @@ const resetStats = () => {
         <button type="button" @click="resetStats">Reset stats</button>
     </p>
 
-    <p>The Base Knight game trains you on the basic knight moves.</p>
     <h3>fork knight</h3>
     <p>coming soon - find the square that forks two pieces</p>
     <h3>defense knight</h3>

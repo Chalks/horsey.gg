@@ -1,7 +1,7 @@
 import {GOSH} from 'assets/js/constants.js';
 import getKnightDistance from '../getKnightDistance.js';
 
-export default class BaseStat {
+export default class MoveMachineStat {
     difficulty;
 
     start;
@@ -77,7 +77,7 @@ export default class BaseStat {
             difficulty,
         ] = data[date];
 
-        return new BaseStat({
+        return new MoveMachineStat({
             start,
             end,
             moves,

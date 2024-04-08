@@ -7,9 +7,9 @@ import {
 
 import {GOSH, SHUCKS} from 'assets/js/constants.js';
 
-import BaseStat from './BaseStat.js';
+import MoveMachineStat from './MoveMachineStat.js';
 
-describe('BaseStat', () => {
+describe('MoveMachineStat', () => {
     let validSerialized;
     let validDeserialized;
 
@@ -24,7 +24,7 @@ describe('BaseStat', () => {
     };
 
     beforeEach(() => {
-        validDeserialized = new BaseStat({
+        validDeserialized = new MoveMachineStat({
             start: 'a1',
             end: 'h8',
             moves: 10,
@@ -47,7 +47,7 @@ describe('BaseStat', () => {
     });
 
     it('Can NOT construct with nothing defined', () => {
-        expect(() => new BaseStat()).toThrowError();
+        expect(() => new MoveMachineStat()).toThrowError();
     });
 
     it.each([
@@ -60,60 +60,60 @@ describe('BaseStat', () => {
     ])('Can NOT construct if `%s` is not defined', (arg) => {
         delete validDeserialized[arg];
 
-        expect(() => new BaseStat(validDeserialized)).toThrowError();
+        expect(() => new MoveMachineStat(validDeserialized)).toThrowError();
     });
 
     it('Can construct if everything other than difficulty is defined', () => {
         delete validDeserialized.difficulty;
-        expect(() => new BaseStat(validDeserialized)).not.toThrowError();
+        expect(() => new MoveMachineStat(validDeserialized)).not.toThrowError();
     });
 
     it('fills in a default GOSH difficulty if difficulty is undefined', () => {
         delete validDeserialized.difficulty;
-        const result = new BaseStat(validDeserialized);
+        const result = new MoveMachineStat(validDeserialized);
         expect(result.difficulty).toBe(GOSH);
     });
 
     it('Uses difficulty if provided', () => {
         validDeserialized.difficulty = SHUCKS;
-        const result = new BaseStat(validDeserialized);
+        const result = new MoveMachineStat(validDeserialized);
         expect(result.difficulty).toBe(SHUCKS);
     });
 
     it('Can construct from itself', () => {
-        const og = new BaseStat(validDeserialized);
-        expect(() => new BaseStat(og)).not.toThrowError();
+        const og = new MoveMachineStat(validDeserialized);
+        expect(() => new MoveMachineStat(og)).not.toThrowError();
 
-        const copy = new BaseStat(og);
+        const copy = new MoveMachineStat(og);
         expectEqual(og, copy);
     });
 
     it('Can construct from the output of deserialize', () => {
-        const output = BaseStat.deserialize(validSerialized);
+        const output = MoveMachineStat.deserialize(validSerialized);
 
         expect(output).toEqual(validDeserialized);
-        expect(() => new BaseStat(output)).not.toThrowError();
+        expect(() => new MoveMachineStat(output)).not.toThrowError();
     });
 
     it('Deserializing creates the expected shape', () => {
-        const output = BaseStat.deserialize(validSerialized);
+        const output = MoveMachineStat.deserialize(validSerialized);
         expect(output).toEqual(validDeserialized);
     });
 
     it('Serializing creates the expected shape', () => {
-        const og = new BaseStat(validDeserialized);
+        const og = new MoveMachineStat(validDeserialized);
         expect(og.serialize()).toEqual(validSerialized);
     });
 
     // eslint-disable-next-line vitest/expect-expect
     it('Is idempotent when serialized -> deserialized', () => {
-        const og = new BaseStat(validDeserialized);
-        const transformed = BaseStat.deserialize(og.serialize());
+        const og = new MoveMachineStat(validDeserialized);
+        const transformed = MoveMachineStat.deserialize(og.serialize());
         expectEqual(og, transformed);
     });
 
     it('Is idempotent when deserialized -> serialized', () => {
-        const og = BaseStat.deserialize(validSerialized);
+        const og = MoveMachineStat.deserialize(validSerialized);
         expect(og.serialize()).toEqual(validSerialized);
     });
 });

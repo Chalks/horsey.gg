@@ -12,12 +12,12 @@ import {
 // const ROLLING = 100;
 
 // eslint-disable-next-line import/prefer-default-export
-export const useBaseStatsStore = defineStore('baseStatsStore', () => {
+export const useMoveMachineStore = defineStore('moveMachineStore', () => {
     const userStore = useUserStore();
 
     const currentDifficulty = computed(() => userStore.saveFile?.selectedDifficulty ?? GOSH);
 
-    const rawGames = computed(() => Object.values(userStore.saveFile?.baseStats ?? []));
+    const rawGames = computed(() => Object.values(userStore.saveFile?.moveMachineStats ?? []));
 
     const goshGames = computed(() => rawGames.value
         .filter(({difficulty}) => difficulty === GOSH));
@@ -39,8 +39,8 @@ export const useBaseStatsStore = defineStore('baseStatsStore', () => {
 
 
     const games = computed(() => {
-        const baseStats = Object.values(userStore.saveFile?.baseStats ?? []);
-        return baseStats.filter(({difficulty}) => difficulty === currentDifficulty.value);
+        const moveMachineStats = Object.values(userStore.saveFile?.moveMachineStats ?? []);
+        return moveMachineStats.filter(({difficulty}) => difficulty === currentDifficulty.value);
     });
 
     const allGames = computed(() => games.value.length);
@@ -68,7 +68,7 @@ export const useBaseStatsStore = defineStore('baseStatsStore', () => {
     */
 
     // eslint-disable-next-line arrow-body-style
-    const baseStats = computed(() => {
+    const stats = computed(() => {
         /*
         const rollingGames = rollingMoves.value.length; // calculated by count of stats stored
         const rm = rollingMoves.value.reduce((acc, val) => acc + val, 0);
@@ -134,7 +134,7 @@ export const useBaseStatsStore = defineStore('baseStatsStore', () => {
         darnGames,
         heckGames,
         frickGames,
-        baseStats,
+        stats,
     };
 });
 

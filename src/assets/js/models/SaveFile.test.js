@@ -8,18 +8,18 @@ import {
 import {GOSH, SHUCKS} from 'assets/js/constants.js';
 
 import SaveFile from './SaveFile.js';
-import BaseStat from './BaseStat.js';
+import MoveMachineStat from './MoveMachineStat.js';
 
 describe('SaveFile', () => {
     let validSerialized;
     let validDeserialized;
 
     const expectEqual = (a, b) => {
-        expect(a.baseStats).toEqual(b.baseStats);
+        expect(a.moveMachineStats).toEqual(b.moveMachineStats);
 
         Object.entries(a).forEach(([key, value]) => {
             expect(value).toEqual(b[key]);
-            expect(value.baseStats).toEqual(b[key].baseStats);
+            expect(value.moveMachineStats).toEqual(b[key].moveMachineStats);
             expect(value.end).toEqual(b[key].end);
             expect(value.moves).toEqual(b[key].moves);
             expect(value.invalidMoves).toEqual(b[key].invalidMoves);
@@ -35,8 +35,8 @@ describe('SaveFile', () => {
 
         validDeserialized = new SaveFile({
             selectedDifficulty: SHUCKS,
-            baseStats: {
-                [date]: new BaseStat({
+            moveMachineStats: {
+                [date]: new MoveMachineStat({
                     start: 'a1',
                     end: 'h8',
                     moves: 10,
@@ -45,7 +45,7 @@ describe('SaveFile', () => {
                     date,
                     difficulty: GOSH,
                 }),
-                [date2]: new BaseStat({
+                [date2]: new MoveMachineStat({
                     start: 'b1',
                     end: 'g8',
                     moves: 20,
@@ -59,22 +59,22 @@ describe('SaveFile', () => {
 
         validSerialized = {
             selectedDifficulty: SHUCKS,
-            baseStats: {
-                [validDeserialized.baseStats[date].date]: [
-                    validDeserialized.baseStats[date].start,
-                    validDeserialized.baseStats[date].end,
-                    validDeserialized.baseStats[date].moves,
-                    validDeserialized.baseStats[date].invalidMoves,
-                    validDeserialized.baseStats[date].ms,
-                    validDeserialized.baseStats[date].difficulty,
+            moveMachineStats: {
+                [validDeserialized.moveMachineStats[date].date]: [
+                    validDeserialized.moveMachineStats[date].start,
+                    validDeserialized.moveMachineStats[date].end,
+                    validDeserialized.moveMachineStats[date].moves,
+                    validDeserialized.moveMachineStats[date].invalidMoves,
+                    validDeserialized.moveMachineStats[date].ms,
+                    validDeserialized.moveMachineStats[date].difficulty,
                 ],
-                [validDeserialized.baseStats[date2].date]: [
-                    validDeserialized.baseStats[date2].start,
-                    validDeserialized.baseStats[date2].end,
-                    validDeserialized.baseStats[date2].moves,
-                    validDeserialized.baseStats[date2].invalidMoves,
-                    validDeserialized.baseStats[date2].ms,
-                    validDeserialized.baseStats[date2].difficulty,
+                [validDeserialized.moveMachineStats[date2].date]: [
+                    validDeserialized.moveMachineStats[date2].start,
+                    validDeserialized.moveMachineStats[date2].end,
+                    validDeserialized.moveMachineStats[date2].moves,
+                    validDeserialized.moveMachineStats[date2].invalidMoves,
+                    validDeserialized.moveMachineStats[date2].ms,
+                    validDeserialized.moveMachineStats[date2].difficulty,
                 ],
             },
         };

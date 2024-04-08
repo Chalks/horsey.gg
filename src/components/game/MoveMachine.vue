@@ -1,5 +1,5 @@
 <script setup>
-import BaseStat from 'assets/js/models/BaseStat.js';
+import MoveMachineStat from 'assets/js/models/MoveMachineStat.js';
 import {GOSH, DANG, DARN, HECK, FRICK} from 'assets/js/constants.js';
 import {useUserStore} from 'store/user.js';
 import {useAchievementsStore} from 'store/achievements.js';
@@ -54,7 +54,7 @@ const resetStats = () => {
 };
 
 const handleWin = () => {
-    userStore.saveFile.addBaseStat(new BaseStat({
+    userStore.saveFile.addMoveMachineStat(new MoveMachineStat({
         ...stats,
         difficulty: userStore.selectedDifficulty,
         date: Date.now(),
@@ -117,12 +117,13 @@ const handleInvalidMove = () => {
         />
         <div class="absolute top-0 right-0 bottom-0">
             <DifficultyToggle
-                :gosh="canGosh"
-                :shucks="canShucks"
-                :dang="canDang"
-                :darn="canDarn"
-                :heck="canHeck"
-                :frick="canFrick"
+                :difficulty="userStore.selectedDifficulty"
+                :can-gosh="canGosh"
+                :can-shucks="canShucks"
+                :can-dang="canDang"
+                :can-darn="canDarn"
+                :can-heck="canHeck"
+                :can-frick="canFrick"
             />
         </div>
     </div>

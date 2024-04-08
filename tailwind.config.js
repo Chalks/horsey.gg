@@ -50,19 +50,19 @@ module.exports = {
                 },
                 '.ribbon-t': {
                     position: 'relative',
-                    clipPath: 'polygon(0 0, 50% 10px, 100% 0, 100% 100%, 0 100%)',
+                    clipPath: 'polygon(0 0, 50% 6px, 100% 0, 100% 100%, 0 100%)',
                 },
                 '.ribbon-r': {
                     position: 'relative',
-                    clipPath: 'polygon(0 0, 100% 0, calc(100% - 10px) 50%, 100% 100%, 0 100%)',
+                    clipPath: 'polygon(0 0, 100% 0, calc(100% - 6px) 50%, 100% 100%, 0 100%)',
                 },
                 '.ribbon-b': {
                     position: 'relative',
-                    clipPath: 'polygon(0 0, 100% 0, 100% 100%, 50% calc(100% - 10px), 0 100%)',
+                    clipPath: 'polygon(0 0, 100% 0, 100% 100%, 50% calc(100% - 6px), 0 100%)',
                 },
                 '.ribbon-l': {
                     position: 'relative',
-                    clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%, 10px 50%)',
+                    clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%, 6px 50%)',
                 },
 
                 '.ribbon-t-as-border': {

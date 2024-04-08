@@ -1,9 +1,7 @@
 <script setup>
-import {useUserStore} from 'store/user.js';
-
 const props = defineProps({
     disabled: {type: Boolean, default: false},
-    small: {type: Boolean, default: false},
+    on: {type: Boolean, default: false},
     gosh: {type: Boolean, default: false},
     shucks: {type: Boolean, default: false},
     dang: {type: Boolean, default: false},
@@ -11,22 +9,6 @@ const props = defineProps({
     heck: {type: Boolean, default: false},
     frick: {type: Boolean, default: false},
 });
-
-const userStore = useUserStore();
-
-const isGosh = computed(() => props.gosh && userStore.isGosh);
-const isShucks = computed(() => props.shucks && userStore.isShucks);
-const isDang = computed(() => props.dang && userStore.isDang);
-const isDarn = computed(() => props.darn && userStore.isDarn);
-const isHeck = computed(() => props.heck && userStore.isHeck);
-const isFrick = computed(() => props.frick && userStore.isFrick);
-
-const on = computed(() => isGosh.value
-    || isShucks.value
-    || isDang.value
-    || isDarn.value
-    || isHeck.value
-    || isFrick.value);
 
 const emit = defineEmits(['click']);
 
