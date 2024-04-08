@@ -3,6 +3,7 @@ import {useUserStore} from 'store/user.js';
 
 const props = defineProps({
     disabled: {type: Boolean, default: false},
+    small: {type: Boolean, default: false},
     gosh: {type: Boolean, default: false},
     shucks: {type: Boolean, default: false},
     dang: {type: Boolean, default: false},
@@ -38,18 +39,19 @@ const handleClick = () => {
 
 <template>
     <div
-        class="select-none cursor-pointer transition-all"
+        class="select-none transition-all ribbon-r w-8 h-4 bg-gray-700"
         :class="{
             '-translate-x-[0rem]': on,
             '-translate-x-[1rem]': !on,
             'hover:-translate-x-[0.5rem]': !on && !disabled,
+            'cursor-pointer': !disabled,
             'cursor-not-allowed': disabled,
             'opacity-30': disabled,
         }"
         @click="handleClick"
     >
         <div
-            class="border-y border-gray-700 inline-block relative text-center overflow-hidden w-8 h-4"
+            class="ribbon-r-as-border border-gray-700"
             :class="{
                 'bg-gosh': gosh,
                 'bg-shucks': shucks,
@@ -58,8 +60,6 @@ const handleClick = () => {
                 'bg-heck': heck,
                 'bg-frick': frick,
             }"
-        >
-            <div class="absolute border border-gray-700 bg-white w-[0.707106rem] h-[0.707106rem] top-1/2 right-0 rotate-45 translate-x-1/2 -translate-y-1/2" />
-        </div>
+        />
     </div>
 </template>

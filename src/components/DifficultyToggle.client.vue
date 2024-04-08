@@ -21,7 +21,7 @@ const setHeck = () => { userStore.setDifficulty(HECK); };
 const setFrick = () => { userStore.setDifficulty(FRICK); };
 </script>
 <template>
-    <div class="relative flex flex-col gap-1 overflow-clip w-8 h-full">
+    <div class="relative flex flex-col gap-1.5 overflow-clip w-8 h-full">
         <DifficultyRibbon :disabled="!gosh" gosh @click="setGosh" />
         <DifficultyRibbon :disabled="!shucks" shucks @click="setShucks" />
         <DifficultyRibbon :disabled="!dang" dang @click="setDang" />

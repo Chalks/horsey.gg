@@ -19,7 +19,7 @@ const props = defineProps({
 
 const achieved = computed(() => achievementStore[props.id]);
 const emit = defineEmits(['click']);
-const selected = computed(() => props.id === props.selectedId);
+// const selected = computed(() => props.id === props.selectedId);
 
 const handleClick = () => {
     emit('click', {id: props.id, achieved: achieved.value});
@@ -53,13 +53,6 @@ const handleMouseout = () => {
         }"
         @mouseover="handleMouseover"
         @mouseout="handleMouseout"
-*/
-</script>
-
-<template>
-    <div
-        ref="container"
-        class="relative flex items-center justify-center h-12 w-12 border rounded overflow-hidden cursor-pointer"
         :class="{
             'bg-gosh': gosh,
             'bg-shucks': shucks,
@@ -70,8 +63,35 @@ const handleMouseout = () => {
             'shadow-lg': selected,
             'border-horse': selected,
         }"
+*/
+</script>
+
+<template>
+    <div
+        ref="container"
+        class="relative h-[15.5ch] w-[15.5ch] border rounded overflow-hidden cursor-pointer"
         @click="handleClick"
     >
+        <div class="flex flex-col gap-2">
+            <DifficultyRibbon gosh />
+
+            <div class="ribbon-r w-8 h-4 bg-black">
+                <div class="ribbon-r-as-border border-black bg-gosh" />
+            </div>
+            <div class="ribbon-t w-8 h-4 bg-black">
+                <div class="ribbon-t-as-border border-black bg-white" />
+            </div>
+            <div class="ribbon-l w-8 h-4 bg-black">
+                <div class="ribbon-l-as-border border-black bg-white" />
+            </div>
+            <div class="ribbon-b w-8 h-4 bg-black">
+                <div class="ribbon-b-as-border border-black bg-white" />
+            </div>
+
+            <div class="ribbon-l w-8 h-4 bg-gosh" />
+        </div>
+
+        <div class="w-full border-b bg-red-300 h-2" />
         <Icon :icon="icon" />
         <div v-if="achieved" class="absolute bg-white w-12 h-12 right-0 bottom-0 rotate-45 translate-x-1/2 translate-y-1/2">
             <Icon
@@ -84,4 +104,12 @@ const handleMouseout = () => {
 </template>
 
 <style scoped>
+    .ribbon {
+        @apply ribbon-r bg-black;
+    }
+
+    .ribbon::after {
+        @apply ribbon-r-as-border bg-blue-100 border-black;
+        content: '';
+    }
 </style>
