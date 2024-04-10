@@ -1,9 +1,8 @@
 <script setup>
 import {GOSH, SHUCKS, DANG, DARN, HECK, FRICK} from 'assets/js/constants.js';
 
-import {useUserStore} from 'store/user.js';
-
 const props = defineProps({
+    difficulty: {type: Number, required: true},
     gosh: {type: Boolean, default: false},
     shucks: {type: Boolean, default: false},
     dang: {type: Boolean, default: false},
@@ -12,14 +11,12 @@ const props = defineProps({
     frick: {type: Boolean, default: false},
 });
 
-const userStore = useUserStore();
-
-const isGosh = computed(() => props.gosh && userStore.selectedDifficulty === GOSH);
-const isShucks = computed(() => props.shucks && userStore.selectedDifficulty === SHUCKS);
-const isDang = computed(() => props.dang && userStore.selectedDifficulty === DANG);
-const isDarn = computed(() => props.darn && userStore.selectedDifficulty === DARN);
-const isHeck = computed(() => props.heck && userStore.selectedDifficulty === HECK);
-const isFrick = computed(() => props.frick && userStore.selectedDifficulty === FRICK);
+const isGosh = computed(() => props.gosh && props.difficulty === GOSH);
+const isShucks = computed(() => props.shucks && props.difficulty === SHUCKS);
+const isDang = computed(() => props.dang && props.difficulty === DANG);
+const isDarn = computed(() => props.darn && props.difficulty === DARN);
+const isHeck = computed(() => props.heck && props.difficulty === HECK);
+const isFrick = computed(() => props.frick && props.difficulty === FRICK);
 
 const show = computed(() => isGosh.value
     || isShucks.value

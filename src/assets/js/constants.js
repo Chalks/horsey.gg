@@ -1,5 +1,7 @@
 import {MARKER_TYPE} from 'cm-chessboard/src/extensions/markers/Markers.js';
 
+export const MOVE_MACHINE = 'MOVE_MACHINE';
+
 export const HOVER_MARKER = MARKER_TYPE.frame;
 export const MOVE_MARKER = MARKER_TYPE.dot;
 export const GOAL_MARKER = MARKER_TYPE.circlePrimary;

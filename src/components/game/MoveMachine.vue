@@ -2,12 +2,14 @@
 import MoveMachineStat from 'assets/js/models/MoveMachineStat.js';
 import {GOSH, DANG, DARN, HECK, FRICK} from 'assets/js/constants.js';
 import {useUserStore} from 'store/user.js';
+import {useMoveMachineStore} from 'store/moveMachine.js';
 import {useAchievementsStore} from 'store/achievements.js';
 import getRandomSquare from 'assets/js/getRandomSquare.js';
 
 const board = ref(null);
 const goalSquares = ref([]);
 const userStore = useUserStore();
+const moveMachineStore = useMoveMachineStore();
 const achievementsStore = useAchievementsStore();
 let stats;
 
@@ -20,21 +22,21 @@ const canHeck = computed(() => achievementsStore.unlocked || achievementsStore.m
 const canFrick = computed(() => achievementsStore.unlocked || achievementsStore.mmWinHeck10);
 
 // difficulty modifiers
-const showLegalMoves = computed(() => userStore.selectedDifficulty === GOSH);
+const showLegalMoves = computed(() => moveMachineStore.currentDifficulty === GOSH);
 const disableLegalMoves = computed(() => {
-    if (userStore.selectedDifficulty === DANG) {
+    if (moveMachineStore.currentDifficulty === DANG) {
         return 1;
     }
 
-    if (userStore.selectedDifficulty === DARN) {
+    if (moveMachineStore.currentDifficulty === DARN) {
         return 2;
     }
 
-    if (userStore.selectedDifficulty === HECK) {
+    if (moveMachineStore.currentDifficulty === HECK) {
         return 3;
     }
 
-    if (userStore.selectedDifficulty === FRICK) {
+    if (moveMachineStore.currentDifficulty === FRICK) {
         return 4;
     }
 
@@ -53,15 +55,19 @@ const resetStats = () => {
     };
 };
 
+const reset = () => {
+    resetStats();
+    board.value.stop();
+};
+
 const handleWin = () => {
     userStore.saveFile.addMoveMachineStat(new MoveMachineStat({
         ...stats,
-        difficulty: userStore.selectedDifficulty,
+        difficulty: moveMachineStore.currentDifficulty,
         date: Date.now(),
     }));
 
-    resetStats();
-    board.value.stop();
+    reset();
 };
 
 const handleStart = async () => {
@@ -99,10 +105,22 @@ const handleMove = ({from, to}) => {
 const handleInvalidMove = () => {
     stats.invalidMoves += 1;
 };
+
+const handleDifficultyChange = (difficulty) => {
+    if (difficulty !== moveMachineStore.currentDifficulty) {
+        reset();
+    }
+    moveMachineStore.setDifficulty(difficulty);
+};
 </script>
 
 <template>
-    <GameTitleBlock title="Move Machine" class="mb-4" />
+    <GameTitleBlock
+        :difficulty="moveMachineStore.currentDifficulty"
+        title="Move Machine"
+        class="mb-4"
+        description="Move the horsey to the indicated square"
+    />
 
     <div class="relative pr-8">
         <ChessBoard
@@ -110,47 +128,48 @@ const handleInvalidMove = () => {
             :show-legal-moves="showLegalMoves"
             :disable-legal-moves="disableLegalMoves"
             :goal-squares="goalSquares"
-            class="flex-grow"
+            class="flex-grow border border-gray-700"
             @start="handleStart"
             @move="handleMove"
             @invalid-move="handleInvalidMove"
         />
         <div class="absolute top-0 right-0 bottom-0">
-            <DifficultyToggle
-                :difficulty="userStore.selectedDifficulty"
+            <GameDifficultyToggle
+                :difficulty="moveMachineStore.currentDifficulty"
                 :can-gosh="canGosh"
                 :can-shucks="canShucks"
                 :can-dang="canDang"
                 :can-darn="canDarn"
                 :can-heck="canHeck"
                 :can-frick="canFrick"
+                @change="handleDifficultyChange"
             />
         </div>
     </div>
 
 
     <div class="mt-1">
-        <GameDifficultyDescription gosh>
+        <GameDifficultyDescription :difficulty="moveMachineStore.currentDifficulty" gosh>
             Show legal moves
         </GameDifficultyDescription>
 
-        <GameDifficultyDescription shucks dang darn heck frick>
+        <GameDifficultyDescription :difficulty="moveMachineStore.currentDifficulty" shucks dang darn heck frick>
             Hide legal moves
         </GameDifficultyDescription>
 
-        <GameDifficultyDescription dang darn heck frick>
+        <GameDifficultyDescription :difficulty="moveMachineStore.currentDifficulty" dang darn heck frick>
             Disable one legal move
         </GameDifficultyDescription>
 
-        <GameDifficultyDescription darn heck frick>
+        <GameDifficultyDescription :difficulty="moveMachineStore.currentDifficulty" darn heck frick>
             Disable one more legal move
         </GameDifficultyDescription>
 
-        <GameDifficultyDescription heck frick>
+        <GameDifficultyDescription :difficulty="moveMachineStore.currentDifficulty" heck frick>
             Disable one more legal move
         </GameDifficultyDescription>
 
-        <GameDifficultyDescription frick>
+        <GameDifficultyDescription :difficulty="moveMachineStore.currentDifficulty" frick>
             Disable one more legal move
         </GameDifficultyDescription>
     </div>

@@ -15,6 +15,10 @@ import {
 export const useMoveMachineStore = defineStore('moveMachineStore', () => {
     const userStore = useUserStore();
 
+    function setDifficulty(difficulty) {
+        userStore?.saveFile?.setMoveMachineDifficulty(difficulty);
+    }
+
     const currentDifficulty = computed(() => userStore
         .saveFile?.selectedDifficulties?.moveMachine ?? GOSH);
 
@@ -129,13 +133,14 @@ export const useMoveMachineStore = defineStore('moveMachineStore', () => {
 
     return {
         currentDifficulty,
-        rawGames,
-        goshGames,
-        shucksGames,
         dangGames,
         darnGames,
-        heckGames,
         frickGames,
+        goshGames,
+        heckGames,
+        rawGames,
+        setDifficulty,
+        shucksGames,
         stats,
     };
 });

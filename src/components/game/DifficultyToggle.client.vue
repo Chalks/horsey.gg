@@ -1,8 +1,6 @@
 <script setup>
-import {useUserStore} from 'store/user.js';
 import {GOSH, SHUCKS, DANG, DARN, HECK, FRICK} from 'assets/js/constants.js';
-
-const userStore = useUserStore();
+import difficultyName from 'assets/js/difficultyName.js';
 
 defineProps({
     difficulty: {type: Number, default: GOSH},
@@ -14,12 +12,14 @@ defineProps({
     canFrick: {type: Boolean, default: false},
 });
 
-const setGosh = () => { userStore.setDifficulty(GOSH); };
-const setShucks = () => { userStore.setDifficulty(SHUCKS); };
-const setDang = () => { userStore.setDifficulty(DANG); };
-const setDarn = () => { userStore.setDifficulty(DARN); };
-const setHeck = () => { userStore.setDifficulty(HECK); };
-const setFrick = () => { userStore.setDifficulty(FRICK); };
+const emit = defineEmits(['change']);
+
+const setGosh = () => { emit('change', GOSH); };
+const setShucks = () => { emit('change', SHUCKS); };
+const setDang = () => { emit('change', DANG); };
+const setDarn = () => { emit('change', DARN); };
+const setHeck = () => { emit('change', HECK); };
+const setFrick = () => { emit('change', FRICK); };
 </script>
 <template>
     <div class="relative flex flex-col gap-1.5 overflow-clip w-8 h-full">
@@ -33,23 +33,23 @@ const setFrick = () => { userStore.setDifficulty(FRICK); };
         <div
             class="flex flex-col justify-end items-center grow bg-gradient-to-t ml-1 pb-1"
             :class="{
-                'from-gosh': userStore.isGosh,
-                'from-shucks': userStore.isShucks,
-                'from-dang': userStore.isDang,
-                'from-darn': userStore.isDarn,
-                'from-heck': userStore.isHeck,
-                'from-frick': userStore.isFrick,
+                'from-gosh': difficulty === GOSH,
+                'from-shucks': difficulty === SHUCKS,
+                'from-dang': difficulty === DANG,
+                'from-darn': difficulty === DARN,
+                'from-heck': difficulty === HECK,
+                'from-frick': difficulty === FRICK,
 
-                'text-gosh': userStore.isGosh,
-                'text-shucks': userStore.isShucks,
-                'text-dang': userStore.isDang,
-                'text-darn': userStore.isDarn,
-                'text-heck': userStore.isHeck,
-                'text-frick': userStore.isFrick,
+                'text-gosh': difficulty === GOSH,
+                'text-shucks': difficulty === SHUCKS,
+                'text-dang': difficulty === DANG,
+                'text-darn': difficulty === DARN,
+                'text-heck': difficulty === HECK,
+                'text-frick': difficulty === FRICK,
             }"
         >
             <div
-                v-for="(char, index) in userStore.difficultyName"
+                v-for="(char, index) in difficultyName(difficulty)"
                 :key="`letter-${char}-${index}`"
                 class="text-sm md:text-lg lg:text-xl xl:text-2xl mix-blend-color-dodge"
             >

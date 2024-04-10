@@ -1,5 +1,5 @@
 import {save as sjwtSave} from 'sjwt';
-import {GOSH} from 'assets/js/constants.js';
+import {GOSH, MOVE_MACHINE} from 'assets/js/constants.js';
 import MoveMachineStat from './MoveMachineStat.js';
 
 export default class SaveFile {
@@ -33,8 +33,27 @@ export default class SaveFile {
         });
     }
 
-    setDifficulty(difficulty) {
-        this.selectedDifficulties.moveMachine = difficulty;
+    setMoveMachineDifficulty(difficulty) {
+        this.setDifficulty(MOVE_MACHINE, difficulty);
+    }
+
+    setDifficulty(game, difficulty) {
+        switch (game) {
+            case MOVE_MACHINE:
+            default:
+                this.selectedDifficulties.moveMachine = difficulty;
+        }
+
+        // save just the difficulties
+        sjwtSave({
+            privateData: {
+                saveFile: {
+                    selectedDifficulties: {
+                        ...this.selectedDifficulties,
+                    },
+                },
+            },
+        });
     }
 
     addMoveMachineStat(moveMachineStat) {
