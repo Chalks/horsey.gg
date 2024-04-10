@@ -3,23 +3,23 @@ import MoveMachineStat from 'assets/js/models/MoveMachineStat.js';
 import {GOSH, DANG, DARN, HECK, FRICK} from 'assets/js/constants.js';
 import {useUserStore} from 'store/user.js';
 import {useMoveMachineStore} from 'store/moveMachine.js';
-import {useAchievementsStore} from 'store/achievements.js';
+import {useAchievementStore} from 'store/achievement.js';
 import getRandomSquare from 'assets/js/getRandomSquare.js';
 
 const board = ref(null);
 const goalSquares = ref([]);
 const userStore = useUserStore();
 const moveMachineStore = useMoveMachineStore();
-const achievementsStore = useAchievementsStore();
+const achievementStore = useAchievementStore();
 let stats;
 
 // achievement unlocks
 const canGosh = true;
 const canShucks = true;
-const canDang = computed(() => achievementsStore.unlocked || achievementsStore.mmWinShucks10);
-const canDarn = computed(() => achievementsStore.unlocked || achievementsStore.mmWinDang10);
-const canHeck = computed(() => achievementsStore.unlocked || achievementsStore.mmWinDarn10);
-const canFrick = computed(() => achievementsStore.unlocked || achievementsStore.mmWinHeck10);
+const canDang = computed(() => achievementStore.unlocked || achievementStore.mmAchievements.shucks10);
+const canDarn = computed(() => achievementStore.unlocked || achievementStore.mmAchievements.dang10);
+const canHeck = computed(() => achievementStore.unlocked || achievementStore.mmAchievements.darn10);
+const canFrick = computed(() => achievementStore.unlocked || achievementStore.mmAchievements.heck10);
 
 // difficulty modifiers
 const showLegalMoves = computed(() => moveMachineStore.currentDifficulty === GOSH);

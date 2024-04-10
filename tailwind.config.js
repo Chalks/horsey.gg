@@ -20,6 +20,10 @@ module.exports = {
         },
 
         extend: {
+            animation: {
+                'fall-rotate-in': 'fallRotate 1s ease-in 1',
+            },
+
             colors: {
                 horse: '#5D9945',
                 gosh: colors.green['200'],
@@ -32,6 +36,22 @@ module.exports = {
 
             gradientColorStopPositions: {
                 33: '33%',
+            },
+
+            keyframes: {
+                fallRotate: {
+                    '0%': {transform: 'scale(2)'},
+                    '10%': {transform: 'rotate(360deg) scale(1.9)'},
+                    '20%': {transform: 'rotate(0deg) cale(1.7)'},
+                    '30%': {transform: 'rotate(360deg) cale(1.4)'},
+                    '40%': {transform: 'rotate(0deg) cale(1.0)'},
+                    '50%': {transform: 'rotate(360deg) cale(0.5)'},
+                    '60%': {transform: 'rotate(0deg) cale(0.9)'},
+                    '70%': {transform: 'rotate(360deg) cale(1.2)'},
+                    '80%': {transform: 'rotate(0deg) cale(1.0)'},
+                    '90%': {transform: 'rotate(360deg) cale(0.9)'},
+                    '100%': {transform: 'rotate(0deg) scale(1)'},
+                },
             },
         },
     },

@@ -1,7 +1,7 @@
 <script setup>
-import {useAchievementsStore} from 'store/achievements.js';
+import {useAchievementStore} from 'store/achievement.js';
 
-const achievementsStore = useAchievementsStore();
+const achievementStore = useAchievementStore();
 
 defineProps({
     large: {
@@ -30,9 +30,9 @@ const handleClick = () => {
     } else if (clickCount.value === 16) {
         $toast.error('...');
     } else if (clickCount.value === 32) {
-        const unlockText = achievementsStore.unlocked ? 'lock' : 'unlock';
+        const unlockText = achievementStore.unlocked ? 'lock' : 'unlock';
         $toast.success(`Fine, you win. I'll ${unlockText} all the achievements for ya`);
-        achievementsStore.toggleGlobalLock();
+        achievementStore.toggleGlobalLock();
     }
 };
 </script>

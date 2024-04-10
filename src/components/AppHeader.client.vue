@@ -1,7 +1,10 @@
 <script setup>
+import {Icon} from '@iconify/vue';
 import {useUserStore} from 'store/user.js';
+import {useAchievementStore} from 'store/achievement.js';
 
 const userStore = useUserStore();
+const achievementStore = useAchievementStore();
 </script>
 
 <template>
@@ -15,10 +18,17 @@ const userStore = useUserStore();
             </NuxtLink>
 
             <NuxtLink
+                v-if="achievementStore.achievementCount > 0"
                 href="/achievements"
-                class="hidden flex items-center gap-2 hover:text-horse transition-colors"
+                class="relative group flex items-center gap-2 hover:text-horse transition-colors"
+                :class="{
+                    'animate-fall-rotate-in': achievementStore.achievementCount === 1,
+                }"
             >
-                achievements
+                <span class="absolute flex items-center px-2 right-0 top-0 bottom-0 translate-x-full invisible group-hover:visible opacity-0 group-hover:opacity-100 transition-opacity">
+                    achievements
+                </span>
+                <Icon icon="pepicons-pencil:trophy-circle-filled" />
             </NuxtLink>
 
             <div class="grow" />

@@ -136,6 +136,7 @@ export const useMoveMachineStore = defineStore('moveMachineStore', () => {
         dangGames,
         darnGames,
         frickGames,
+        games,
         goshGames,
         heckGames,
         rawGames,

@@ -1,6 +1,6 @@
 <template>
-    <div class="hidden fixed -left-20 top-12">
-        <div class="sticky top-0"><img src="/horsey.png" class="rotate-90" /></div>
+    <div class="">
+        <img src="/horsey.png" width="24" />
     </div>
 </template>
 

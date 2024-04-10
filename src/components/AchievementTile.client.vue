@@ -1,8 +1,8 @@
 <script setup>
 import {Icon} from '@iconify/vue';
-import {useAchievementsStore} from 'store/achievements.js';
+import {useAchievementStore} from 'store/achievement.js';
 
-const achievementStore = useAchievementsStore();
+const achievementStore = useAchievementStore();
 
 const props = defineProps({
     id: {type: String, required: true},
