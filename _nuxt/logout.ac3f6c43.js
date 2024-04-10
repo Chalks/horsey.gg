@@ -1,1 +1,0 @@
-import{s as e}from"./seo.5da8f177.js";import{m as t,W as s,A as a,o as l,b as n,F as r,e as o}from"./entry.bc4c838d.js";const u=o("h1",null,"Logout",-1),c=o("p",null,"Why would you do that.",-1),h={__name:"logout",setup(_){return e({pageTitle:"logout - horsey.gg"}),t(async()=>{await s(),a().setUser(null)}),(m,p)=>(l(),n(r,null,[u,c],64))}};export{h as default};
