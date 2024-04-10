@@ -12,6 +12,7 @@ const handleAchievementClick = ({id}) => {
 
 <template>
     <h1>Achievements</h1>
+    <p class="italic">Please note that this is very much under development. Working on making it look pretty!</p>
     <h3>MOVE MACHINE</h3>
 
     <div class="flex gap-[1ch] flex-wrap justify-start items-start w-full">

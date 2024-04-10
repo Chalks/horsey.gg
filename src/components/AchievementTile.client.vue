@@ -1,13 +1,11 @@
 <script setup>
 import {Icon} from '@iconify/vue';
-import {useAchievementStore} from 'store/achievement.js';
-
-const achievementStore = useAchievementStore();
 
 const props = defineProps({
     id: {type: String, required: true},
     icon: {type: String, required: true},
-    selectedId: {type: String, default: null},
+    title: {type: String, required: true},
+    selected: {type: Boolean, default: false},
 
     gosh: {type: Boolean, default: false},
     shucks: {type: Boolean, default: false},
@@ -17,9 +15,14 @@ const props = defineProps({
     frick: {type: Boolean, default: false},
 });
 
-const achieved = computed(() => achievementStore[props.id]);
+const achieved = computed(() => props.gosh
+    && props.shucks
+    && props.dang
+    && props.darn
+    && props.heck
+    && props.frick);
+
 const emit = defineEmits(['click']);
-// const selected = computed(() => props.id === props.selectedId);
 
 const handleClick = () => {
     emit('click', {id: props.id, achieved: achieved.value});
@@ -69,47 +72,34 @@ const handleMouseout = () => {
 <template>
     <div
         ref="container"
-        class="relative h-[15.5ch] w-[15.5ch] border rounded overflow-hidden cursor-pointer"
+        class="relative h-[15.5ch] w-[15.5ch] border overflow-hidden cursor-pointer not-prose p-2"
+        :class="{
+            'shadow': selected,
+        }"
         @click="handleClick"
     >
-        <div class="flex flex-col gap-2">
-            <DifficultyRibbon gosh />
+        <p class="font-light uppercase tracking-widest">{{ title }}</p>
 
-            <div class="ribbon-r w-8 h-4 bg-black">
-                <div class="ribbon-r-as-border border-black bg-gosh" />
-            </div>
-            <div class="ribbon-t w-8 h-4 bg-black">
-                <div class="ribbon-t-as-border border-black bg-white" />
-            </div>
-            <div class="ribbon-l w-8 h-4 bg-black">
-                <div class="ribbon-l-as-border border-black bg-white" />
-            </div>
-            <div class="ribbon-b w-8 h-4 bg-black">
-                <div class="ribbon-b-as-border border-black bg-white" />
-            </div>
-
-            <div class="ribbon-l w-8 h-4 bg-gosh" />
+        <div class="grow h-full flex items-center justify-center absolute inset-0">
+            <Icon :icon="icon" />
         </div>
 
-        <div class="w-full border-b bg-red-300 h-2" />
-        <Icon :icon="icon" />
-        <div v-if="achieved" class="absolute bg-white w-12 h-12 right-0 bottom-0 rotate-45 translate-x-1/2 translate-y-1/2">
+        <div v-if="achieved" class="absolute bg-horse w-12 h-12 right-0 top-0 -rotate-45 translate-x-1/2 -translate-y-1/2">
             <Icon
                 icon="game-icons:check-mark"
                 height="12"
-                class="text-green-800 absolute top-1/2 left-1 -translate-y-1/2 -rotate-45"
+                class="text-white absolute top-1/2 left-1 -translate-y-1/2 rotate-45"
             />
+        </div>
+
+        <div class="absolute flex bottom-0 right-2 flex gap-1 z-[-1]">
+            <DifficultyRibbon small on default-cursor direction="t" gosh :disabled="!gosh" />
+            <DifficultyRibbon small on default-cursor direction="t" shucks :disabled="!shucks" />
+            <DifficultyRibbon small on default-cursor direction="t" dang :disabled="!dang" />
+            <DifficultyRibbon small on default-cursor direction="t" darn :disabled="!darn" />
+            <DifficultyRibbon small on default-cursor direction="t" heck :disabled="!heck" />
+            <DifficultyRibbon small on default-cursor direction="t" frick :disabled="!frick" />
         </div>
     </div>
 </template>
 
-<style scoped>
-    .ribbon {
-        @apply ribbon-r bg-black;
-    }
-
-    .ribbon::after {
-        @apply ribbon-r-as-border bg-blue-100 border-black;
-        content: '';
-    }
-</style>
