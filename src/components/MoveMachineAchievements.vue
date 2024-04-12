@@ -44,7 +44,7 @@ const handleAchievementClick = (e) => emit('click', e);
     />
 
     <AchievementTile
-        id="mm-fast"
+        id="mm-greased"
         icon="game-icons:pawn"
         title="Greased"
         description="Have an average game speed of ten seconds or faster"
@@ -59,7 +59,7 @@ const handleAchievementClick = (e) => emit('click', e);
     />
 
     <AchievementTile
-        id="mm-fast"
+        id="mm-lightning"
         icon="game-icons:pawn"
         title="Lightning"
         description="Have an average game speed of seven seconds or faster"
