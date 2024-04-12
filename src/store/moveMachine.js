@@ -112,6 +112,7 @@ export const useMoveMachineStore = defineStore('moveMachineStore', () => {
             // currently used in stats display
             allBestMoveRatio: allOptimalMoves.value / allMoves.value,
             allAverageTimePerMove: allTime.value / allMoves.value,
+            allAverageTimePerGame: allTime.value / allGames.value,
             allAverageSlowestTimePerMove: slowestTenPercent.time / slowestTenPercent.moves,
             allAverageFastestTimePerMove: fastestTenPercent.time / fastestTenPercent.moves,
 

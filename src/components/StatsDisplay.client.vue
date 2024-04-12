@@ -48,13 +48,20 @@ const showLifetimeStats = computed(() => stats.value.allGames >= LIFETIME_MINIMU
             />
 
             <StatItem
-                label="SPEED"
+                label="MOVE SPEED"
                 :value="[
                     stats.allAverageFastestTimePerMove,
                     stats.allAverageTimePerMove,
                     stats.allAverageSlowestTimePerMove,
                 ]"
-                speed
+                move-speed
+                lower-is-better
+            />
+
+            <StatItem
+                label="GAME SPEED"
+                :value="stats.allAverageTimePerGame"
+                game-speed
                 lower-is-better
             />
 

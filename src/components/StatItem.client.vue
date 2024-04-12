@@ -15,7 +15,12 @@ const props = defineProps({
         default: false,
     },
 
-    speed: {
+    gameSpeed: {
+        type: Boolean,
+        default: false,
+    },
+
+    moveSpeed: {
         type: Boolean,
         default: false,
     },
@@ -41,7 +46,11 @@ const offset = computed(() => {
         return (1 - props.value) * 100;
     }
 
-    if (props.speed) {
+    if (props.gameSpeed) {
+        return 0;
+    }
+
+    if (props.moveSpeed) {
         const [fastest, actual, slowest] = props.value;
         return ((actual - fastest) / (slowest - fastest)) * 100;
     }
@@ -58,9 +67,13 @@ const formattedValue = computed(() => {
         return `${(100 * props.value[0]).toPrecision(4)}% optimal moves`;
     }
 
-    if (props.speed) {
+    if (props.gameSpeed) {
+        return `${(props.value).toFixed(2)} ms / game`;
+    }
+
+    if (props.moveSpeed) {
         const [fastest, actual, slowest] = props.value;
-        return `${(actual).toFixed(2)} ms / game (${(slowest).toFixed(2)} avg slowest, ${(fastest).toFixed(2)} avg fastest)`;
+        return `${(actual).toFixed(2)} ms / move (${(slowest).toFixed(2)} avg slowest, ${(fastest).toFixed(2)} avg fastest)`;
     }
 
     if (props.count) {

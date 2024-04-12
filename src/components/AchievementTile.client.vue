@@ -5,6 +5,7 @@ const props = defineProps({
     id: {type: String, required: true},
     icon: {type: String, required: true},
     title: {type: String, required: true},
+    description: {type: String, required: true},
     selected: {type: Boolean, default: false},
 
     gosh: {type: Boolean, default: false},
@@ -79,10 +80,8 @@ const handleMouseout = () => {
         @click="handleClick"
     >
         <p class="font-light uppercase tracking-widest">{{ title }}</p>
+        <p class="font-light text-sm">{{ description }}</p>
 
-        <div class="grow h-full flex items-center justify-center absolute inset-0">
-            <Icon :icon="icon" />
-        </div>
 
         <div v-if="achieved" class="absolute bg-horse w-12 h-12 right-0 top-0 -rotate-45 translate-x-1/2 -translate-y-1/2">
             <Icon

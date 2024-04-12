@@ -13,9 +13,9 @@ const handleAchievementClick = ({id}) => {
 <template>
     <h1>Achievements</h1>
     <p class="italic">Please note that this is very much under development. Working on making it look pretty!</p>
-    <h3>MOVE MACHINE</h3>
+    <h3 class="text-center">MOVE MACHINE</h3>
 
-    <div class="flex gap-[1ch] flex-wrap justify-start items-start w-full">
+    <div class="flex gap-[1ch] flex-wrap items-start justify-center w-full">
         <MoveMachineAchievements
             :selected-id="currentAchievementId"
             @click="handleAchievementClick"
