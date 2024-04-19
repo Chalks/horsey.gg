@@ -22,7 +22,7 @@ const achievementStore = useAchievementStore();
                 href="/achievements"
                 class="relative group flex items-center gap-2 hover:text-horse transition-colors"
                 :class="{
-                    'animate-fall-rotate-in': achievementStore.achievementCount === 1,
+                    'animate-fall-rotate-in': achievementStore.achievementCount > 0,
                 }"
             >
                 <span class="absolute flex items-center px-2 right-0 top-0 bottom-0 translate-x-full invisible group-hover:visible opacity-0 group-hover:opacity-100 transition-opacity">
