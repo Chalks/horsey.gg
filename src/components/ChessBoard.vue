@@ -17,6 +17,7 @@ import 'cm-chessboard/assets/extensions/markers/markers.css';
 const props = defineProps({
     start: {type: String, default: null},
     goalSquares: {type: Array, default: () => []},
+    goalVisited: {type: Array, default: () => []},
     disableLegalMoves: {type: Number, default: 0},
     // pieces: {type: Array, default: []},
     showLegalMoves: {type: Boolean, default: false},
@@ -64,7 +65,9 @@ const drawGoalMarkers = () => {
     board.removeMarkers(GOAL_MARKER);
 
     props.goalSquares.forEach((square) => {
-        board.addMarker(GOAL_MARKER, square);
+        if (!props.goalVisited.includes(square)) {
+            board.addMarker(GOAL_MARKER, square);
+        }
     });
 };
 
@@ -117,7 +120,6 @@ const handleMousedown = (event) => {
         const from = horseyLoc.value;
         board.movePiece(from, to);
         horseyLoc.value = to;
-        drawLegalMoves();
         drawDisabledMoves();
 
         emit('move', {from, to});
@@ -148,7 +150,6 @@ const createBoard = () => {
     board.context.addEventListener('mouseleave', handleMouseleave);
 };
 
-
 onMounted(() => {
     createBoard();
 });
@@ -157,6 +158,11 @@ const startGame = () => {
     playing.value = true;
     emit('start');
 };
+
+watch(props.goalVisited, () => {
+    // TODO why does this only work once
+    drawGoalMarkers();
+});
 
 // public functions
 const ready = () => {

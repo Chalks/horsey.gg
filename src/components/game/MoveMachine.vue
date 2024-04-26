@@ -4,10 +4,11 @@ import {GOSH, DANG, DARN, HECK, FRICK} from 'assets/js/constants.js';
 import {useUserStore} from 'store/user.js';
 import {useMoveMachineStore} from 'store/moveMachine.js';
 import {useAchievementStore} from 'store/achievement.js';
-import getRandomSquare from 'assets/js/getRandomSquare.js';
+import getRandomSquares from 'assets/js/getRandomSquares.js';
 
 const board = ref(null);
 const goalSquares = ref([]);
+const goalVisited = ref([]);
 const userStore = useUserStore();
 const moveMachineStore = useMoveMachineStore();
 const achievementStore = useAchievementStore();
@@ -24,23 +25,25 @@ const canFrick = computed(() => achievementStore.unlocked || achievementStore.mm
 // difficulty modifiers
 const showLegalMoves = computed(() => moveMachineStore.currentDifficulty === GOSH);
 const disableLegalMoves = computed(() => {
-    if (moveMachineStore.currentDifficulty === DANG) {
-        return 1;
+    switch (moveMachineStore.currentDifficulty) {
+        case DANG:
+            return 1;
+        case DARN:
+            return 2;
+        case HECK:
+            return 3;
+        case FRICK:
+            return 4;
+        default:
+            return 0;
     }
-
-    if (moveMachineStore.currentDifficulty === DARN) {
+});
+const goalCount = computed(() => {
+    if (moveMachineStore.currentDifficulty === HECK) {
         return 2;
     }
 
-    if (moveMachineStore.currentDifficulty === HECK) {
-        return 3;
-    }
-
-    if (moveMachineStore.currentDifficulty === FRICK) {
-        return 4;
-    }
-
-    return 0;
+    return 1;
 });
 
 const resetStats = () => {
@@ -57,6 +60,7 @@ const resetStats = () => {
 
 const reset = () => {
     resetStats();
+    goalVisited.value = [];
     board.value.stop();
 };
 
@@ -74,7 +78,7 @@ const handleStart = async () => {
     resetStats();
 
     // create goal
-    goalSquares.value = [getRandomSquare()];
+    goalSquares.value = getRandomSquares(goalCount.value);
 
     // record initial stats
     stats.end = goalSquares.value[0];
@@ -93,7 +97,11 @@ const handleMove = ({from, to}) => {
 
     stats.moves += 1;
 
-    if (goalSquares.value[0] === to) {
+    if (goalSquares.value.includes(to) && !goalVisited.value.includes(to)) {
+        goalVisited.value.push(to);
+    }
+
+    if (goalSquares.value.length === goalVisited.value.length) {
         // on the last move we can calculate timing
         stats.endPerformance = performance.now();
         stats.ms = stats.endPerformance - stats.startPerformance;
@@ -128,6 +136,7 @@ const handleDifficultyChange = (difficulty) => {
             :show-legal-moves="showLegalMoves"
             :disable-legal-moves="disableLegalMoves"
             :goal-squares="goalSquares"
+            :goal-visited="goalVisited"
             class="flex-grow border border-gray-700"
             @start="handleStart"
             @move="handleMove"
